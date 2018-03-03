@@ -1,16 +1,21 @@
 {
   "compilerOptions": {
+    "target": "ES5",
     "module": "commonjs",
-    "target": "ES2016",
-    "sourceMap": true,
+    "moduleResolution": "node",
+    "sourceMap": false,
     "removeComments": true,
     "strict": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "lib": ["ES6", "DOM"],
+    "pretty": true
   },
   "include": [
     "src/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist",
+    "test"
   ]
 }
