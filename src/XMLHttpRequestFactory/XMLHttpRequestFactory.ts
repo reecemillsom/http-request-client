@@ -1,17 +1,12 @@
+import {XMLHttpRequest} from "xmlhttprequest";
 
 export class XMLHttpRequestFactory {
 
-	constructor(private xmlHttpRequest: any) {
+	constructor(private xmlHttpRequest: XMLHttpRequest) {
 
 	}
 
-	public create() {
-
-		if (!this.xmlHttpRequest) {
-
-			throw Error("Error need valid XMLHttpRequest object");
-
-		}
+	public create(): XMLHttpRequest {
 
 		return new this.xmlHttpRequest();
 
