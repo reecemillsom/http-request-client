@@ -2,7 +2,7 @@ import {expect} from "chai";
 import {XMLHttpRequestMock} from "./XMLHttpRequest/XMLHttpRequestMock";
 import {XMLHttpRequestFactory} from "./XMLHttpRequestFactory";
 
-describe.only("XMLHttpRequestFactory", () => {
+describe("XMLHttpRequestFactory", () => {
 
 	let xmlHttpRequestFactory: XMLHttpRequestFactory;
 

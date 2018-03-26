@@ -5,7 +5,8 @@
     "moduleResolution": "node",
     "sourceMap": false,
     "removeComments": true,
-    "strict": true,
+//    "strict": true,
+    "noImplicitReturns": false,
     "outDir": "./dist",
     "lib": ["ES6", "DOM"],
     "pretty": true
