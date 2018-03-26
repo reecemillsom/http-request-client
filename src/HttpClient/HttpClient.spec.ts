@@ -88,7 +88,7 @@ describe.only("Http Client", () => {
 
 				describe.only("if request is done and response status is 200", () => {
 
-					describe("if JSON is invalid", () => {
+					xdescribe("if JSON is invalid", () => {
 
 						it("will return a error response", () => {
 
