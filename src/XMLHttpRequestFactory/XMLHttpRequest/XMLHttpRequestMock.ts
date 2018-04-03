@@ -24,18 +24,12 @@ export class XMLHttpRequestMock {
 	public send() {
 
 
-		// setTimeout(() => {
-
-			this.onload();
-
-		// }, 2000);
+		this.onload();
 
 
 	}
 
 	public onload() {
-
-
 
 
 	}

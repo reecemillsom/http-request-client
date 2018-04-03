@@ -26,31 +26,35 @@ export class HttpClient {
 
 		xmlHttpRequest.open("GET", url, true);
 
-		console.log("SHIT");
+		return new Bluebird((resolve, reject) => {
 
-		xmlHttpRequest.onload = () => {
+			xmlHttpRequest.onload = () => {
 
-			if (xmlHttpRequest.readyState === 4) {
+				if (xmlHttpRequest.readyState === 4) {
 
-				console.log("BOO");
+					if (!this.isResponseValid(xmlHttpRequest)) {
 
-				if (!this.isResponseValid(xmlHttpRequest)) {
+						return reject({ error: "Request didn't come back valid" });
 
-					console.log("HERE");
+					}
 
-					return Bluebird.reject({ error: "Request didn't come back valid" });
+					return this.parseResponse(xmlHttpRequest.responseText).then((response) => {
+
+						return resolve(response);
+
+					}).catch((error) => {
+
+						return reject(error);
+
+					});
 
 				}
 
-				console.log("respnonse>", this.parseResponse(xmlHttpRequest.responseText));
+			};
 
-				return this.parseResponse(xmlHttpRequest.responseText);
+			xmlHttpRequest.send();
 
-			}
-
-		};
-
-		xmlHttpRequest.send();
+		});
 
 	}
 
@@ -64,24 +68,11 @@ export class HttpClient {
 
 	private parseResponse(responseText: string): Bluebird<object> {
 
-		let parsedResponse;
+		return Bluebird.attempt(() => {
 
-		try {
+			return JSON.parse(responseText);
 
-			parsedResponse = JSON.parse(responseText);
-
-		} catch(error) {
-
-			console.log("error>", error);
-
-			return Bluebird.reject({ error: error });
-
-		}
-
-		console.log("parsedResponse>", parsedResponse);
-
-
-		return Bluebird.resolve(parsedResponse);
+		});
 
 	}
 

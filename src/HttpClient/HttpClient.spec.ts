@@ -8,7 +8,7 @@ import {HttpClient} from "./HttpClient";
 
 chai.use(sinonChai);
 
-describe.only("Http Client", () => {
+describe("Http Client", () => {
 
 	let xmlHttpRequestFactoryMock: XMLHttpRequestFactoryMock,
 		httpClient: HttpClient,
@@ -56,22 +56,22 @@ describe.only("Http Client", () => {
 
 			it("will create a new instance of the XMLHttpFactory", () => {
 
-				return httpClient.get("mockurl/foobar").then(() => {
+				xmlHttpRequestFactoryMock.xmlHttp.readyState = 4;
+				xmlHttpRequestFactoryMock.xmlHttp.status = 200;
+				xmlHttpRequestFactoryMock.xmlHttp.responseText = '[{ "foo": "bar" }]';
+
+				return httpClient.get("mockurl/foobar").then((res) => {
 
 					expect(createXMLHttpSpy).to.have.callCount(1);
 
 				});
-
 			});
 
 			describe("when get request is sent", () => {
 
 				describe("if request is done and response status is not 200", () => {
 
-					it.only("will return a rejection with appropriate message", () => {
-
-						// XMLHttpRequestMock.readyState = 4;
-						// XMLHttpRequestMock.status = 400;
+					it("will return a rejection with appropriate message", () => {
 
 						xmlHttpRequestFactoryMock.xmlHttp.readyState = 4;
 						xmlHttpRequestFactoryMock.xmlHttp.status = 400;
@@ -86,25 +86,19 @@ describe.only("Http Client", () => {
 
 				});
 
-				describe.only("if request is done and response status is 200", () => {
+				describe("if request is done and response status is 200", () => {
 
-					xdescribe("if JSON is invalid", () => {
+					describe("if JSON is invalid", () => {
 
 						it("will return a error response", () => {
-
-							// XMLHttpRequestMock.readyState = 4;
-							// XMLHttpRequestMock.status = 200;
-							// XMLHttpRequestMock.responseText = '[{ "foo": "bar" }]';
 
 							xmlHttpRequestFactoryMock.xmlHttp.readyState = 4;
 							xmlHttpRequestFactoryMock.xmlHttp.status = 200;
 							xmlHttpRequestFactoryMock.xmlHttp.responseText = '[{ "foo" "bar" }]';
 
-							return httpClient.get("mockurl/foobar").catch((response) => {
+							return httpClient.get("mockurl/foobar").catch((error) => {
 
-								console.log("response>", response);
-
-								expect(response).to.deep.equal([{ foo: "bar" }]);
+								expect(error).to.be.a.instanceOf(SyntaxError);
 
 							});
 
@@ -116,17 +110,11 @@ describe.only("Http Client", () => {
 
 						it("will return a valid response JSON", () => {
 
-							// XMLHttpRequestMock.readyState = 4;
-							// XMLHttpRequestMock.status = 200;
-							// XMLHttpRequestMock.responseText = '[{ "foo": "bar" }]';
-
 							xmlHttpRequestFactoryMock.xmlHttp.readyState = 4;
 							xmlHttpRequestFactoryMock.xmlHttp.status = 200;
 							xmlHttpRequestFactoryMock.xmlHttp.responseText = '[{ "foo": "bar" }]';
 
 							return httpClient.get("mockurl/foobar").then((response) => {
-
-								console.log("response>", response);
 
 								expect(response).to.deep.equal([{ foo: "bar" }]);
 
