@@ -12,7 +12,8 @@
     "pretty": true
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "./index.ts"
   ],
   "exclude": [
     "node_modules",

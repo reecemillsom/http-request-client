@@ -1,20 +1,15 @@
 import * as Bluebird from "bluebird";
+import {Request} from "../Request";
 
-export class HttpClient {
+export class GetRequest extends Request {
 
-	constructor(private xmlHttpRequestFactory: any) {
+	public async handleRequest(url: string, headers?: object) {
 
-
-	}
-
-
-	public async get(url: string) {
-
-		return await this.getResponse(url);
+		return await this.getResponse(url, headers);
 
 	}
 
-	private getResponse(url: string):Bluebird<object> {
+	private getResponse(url: string, headers?: object):Bluebird<object> {
 
 		if (!url) {
 
@@ -25,6 +20,8 @@ export class HttpClient {
 		const xmlHttpRequest = this.xmlHttpRequestFactory.create();
 
 		xmlHttpRequest.open("GET", url, true);
+
+		this.setRequestHeaders(xmlHttpRequest, headers);
 
 		return new Bluebird((resolve, reject) => {
 

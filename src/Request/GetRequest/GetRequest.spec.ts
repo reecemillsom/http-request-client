@@ -2,29 +2,23 @@ import * as chai from "chai";
 import {expect} from "chai";
 import * as sinon from "sinon";
 import * as sinonChai from "sinon-chai";
-import {XMLHttpRequestMock} from "../XMLHttpRequestFactory/XMLHttpRequest/XMLHttpRequestMock";
-import {XMLHttpRequestFactoryMock} from "../XMLHttpRequestFactory/XMLHttpRequestFactoryMock";
-import {HttpClient} from "./HttpClient";
+import {XMLHttpRequestMock} from "../../XMLHttpRequestFactory/XMLHttpRequest/XMLHttpRequestMock";
+import {XMLHttpRequestFactoryMock} from "../../XMLHttpRequestFactory/XMLHttpRequestFactoryMock";
+import {GetRequest} from "./GetRequest";
 
 chai.use(sinonChai);
 
-describe("Http Client", () => {
+describe("GetRequest", () => {
 
 	let xmlHttpRequestFactoryMock: XMLHttpRequestFactoryMock,
-		httpClient: HttpClient,
+		getRequest: GetRequest,
 		sandbox = sinon.sandbox.create();
 
 	beforeEach(() => {
 
 		xmlHttpRequestFactoryMock = new XMLHttpRequestFactoryMock(XMLHttpRequestMock);
 
-		httpClient = new HttpClient(xmlHttpRequestFactoryMock);
-
-	});
-
-	afterEach(() => {
-
-		sandbox.restore();
+		getRequest = new GetRequest(xmlHttpRequestFactoryMock);
 
 	});
 
@@ -34,7 +28,7 @@ describe("Http Client", () => {
 
 			it("will return a rejection with appropriate message", () => {
 
-				return httpClient.get("").catch((error: object) => {
+				return getRequest.handleRequest("").catch((error: object) => {
 
 					expect(error).to.deep.equal({ error: "Please provide a url" });
 
@@ -60,7 +54,7 @@ describe("Http Client", () => {
 				xmlHttpRequestFactoryMock.xmlHttp.status = 200;
 				xmlHttpRequestFactoryMock.xmlHttp.responseText = '[{ "foo": "bar" }]';
 
-				return httpClient.get("mockurl/foobar").then((res) => {
+				return getRequest.handleRequest("mockurl/foobar").then(() => {
 
 					expect(createXMLHttpSpy).to.have.callCount(1);
 
@@ -76,7 +70,7 @@ describe("Http Client", () => {
 						xmlHttpRequestFactoryMock.xmlHttp.readyState = 4;
 						xmlHttpRequestFactoryMock.xmlHttp.status = 400;
 
-						return httpClient.get("mockurl/foobar").catch((error) => {
+						return getRequest.handleRequest("mockurl/foobar").catch((error) => {
 
 							expect(error).to.deep.equal({ error: "Request didn't come back valid" });
 
@@ -96,7 +90,7 @@ describe("Http Client", () => {
 							xmlHttpRequestFactoryMock.xmlHttp.status = 200;
 							xmlHttpRequestFactoryMock.xmlHttp.responseText = '[{ "foo" "bar" }]';
 
-							return httpClient.get("mockurl/foobar").catch((error) => {
+							return getRequest.handleRequest("mockurl/foobar").catch((error) => {
 
 								expect(error).to.be.a.instanceOf(SyntaxError);
 
@@ -114,7 +108,7 @@ describe("Http Client", () => {
 							xmlHttpRequestFactoryMock.xmlHttp.status = 200;
 							xmlHttpRequestFactoryMock.xmlHttp.responseText = '[{ "foo": "bar" }]';
 
-							return httpClient.get("mockurl/foobar").then((response) => {
+							return getRequest.handleRequest("mockurl/foobar").then((response) => {
 
 								expect(response).to.deep.equal([{ foo: "bar" }]);
 
@@ -128,8 +122,41 @@ describe("Http Client", () => {
 
 			});
 
+			describe("when headers are provided", () => {
+
+				let setRequestHeaderSpy;
+
+				beforeEach(() => {
+
+					setRequestHeaderSpy = sandbox.spy(xmlHttpRequestFactoryMock.xmlHttp, "setRequestHeader");
+
+				});
+
+				it("will set headers for all data in the object", () => {
+
+					xmlHttpRequestFactoryMock.xmlHttp.readyState = 4;
+					xmlHttpRequestFactoryMock.xmlHttp.status = 200;
+					xmlHttpRequestFactoryMock.xmlHttp.responseText = '[{ "foo": "bar" }]';
+
+					const headers = {
+						firstKey: "mockSetting1",
+						secondKey: "mockSetting2"
+					};
+
+					return getRequest.handleRequest("mockurl/foobar", headers).then(() => {
+
+						expect(setRequestHeaderSpy.getCall(0)).to.have.been.calledWith("firstKey", "mockSetting1");
+						expect(setRequestHeaderSpy.getCall(1)).to.have.been.calledWith("secondKey", "mockSetting2");
+
+					});
+
+				});
+
+			});
+
 		});
 
 	});
 
 });
+

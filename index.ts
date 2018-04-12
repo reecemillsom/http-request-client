@@ -1,11 +1,12 @@
 import {XMLHttpRequest} from "xmlhttprequest";
-import {HttpClient} from "./src/HttpClient/HttpClient";
+import {GetRequest} from "./src/Request/GetRequest/GetRequest";
 import {XMLHttpRequestFactory} from "./src/XMLHttpRequestFactory/XMLHttpRequestFactory";
 
-export = () => {
+const factory = new XMLHttpRequestFactory(XMLHttpRequest),
+	Get = new GetRequest(factory);
 
-	const factory = new XMLHttpRequestFactory(XMLHttpRequest);
-
-	return new HttpClient(factory);
-
+export {
+	Get
 };
+
+

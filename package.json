@@ -2,7 +2,7 @@
   "name": "httpclient",
   "version": "1.0.0",
   "description": "Http Client wrapper for doing requests",
-  "main": "index.ts",
+  "main": "./dist/index.js",
   "scripts": {
     "tsc": "tsc",
     "tslint": "rm -rf dist/ && tslint -c tslint.json src/**/*.ts",
@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "bluebird": "^3.5.1",
+    "lodash": "^4.17.5",
     "xmlhttprequest": "^1.8.0"
   }
 }
