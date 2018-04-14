@@ -51,13 +51,13 @@ export class PostRequest extends Request {
 
 	private hasRequestFailed(xmlHttpRequest: XMLHttpRequest): boolean {
 
-		return xmlHttpRequest.readyState === 4 && xmlHttpRequest.status !== 200;
+		return xmlHttpRequest.readyState === 4 && (xmlHttpRequest.status < 200 || xmlHttpRequest.status >= 400);
 
 	}
 
 	private isRequestSuccessful(xmlHttpRequest: XMLHttpRequest): boolean {
 
-		return xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200;
+		return xmlHttpRequest.readyState === 4 && (xmlHttpRequest.status >= 200 && xmlHttpRequest.status < 400);
 
 	}
 

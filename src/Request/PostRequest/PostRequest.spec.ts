@@ -8,7 +8,7 @@ import {PostRequest} from "./PostRequest";
 
 chai.use(sinonChai);
 
-describe.only("PostRequest", () => {
+describe("PostRequest", () => {
 
 	let postRequest,
 		httpFactoryMock,
