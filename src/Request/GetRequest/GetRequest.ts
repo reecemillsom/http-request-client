@@ -3,19 +3,20 @@ import {Request} from "../Request";
 
 export class GetRequest extends Request {
 
-	public async handleRequest(url: string, headers?: object) {
-
-		return await this.getResponse(url, headers);
-
-	}
-
-	private getResponse(url: string, headers?: object):Bluebird<object> {
+	public async handleRequest(url: string, headers?: object, data?: any) {
 
 		if (!url) {
 
 			return Bluebird.reject({ error: "Please provide a url"});
 
 		}
+
+		return await this.getResponse(url, headers, data);
+
+	}
+
+
+	private getResponse(url: string, headers?: object, data?:any):Bluebird<object> {
 
 		const xmlHttpRequest = this.xmlHttpRequestFactory.create();
 

@@ -122,38 +122,6 @@ describe("GetRequest", () => {
 
 			});
 
-			describe("when headers are provided", () => {
-
-				let setRequestHeaderSpy;
-
-				beforeEach(() => {
-
-					setRequestHeaderSpy = sandbox.spy(xmlHttpRequestFactoryMock.xmlHttp, "setRequestHeader");
-
-				});
-
-				it("will set headers for all data in the object", () => {
-
-					xmlHttpRequestFactoryMock.xmlHttp.readyState = 4;
-					xmlHttpRequestFactoryMock.xmlHttp.status = 200;
-					xmlHttpRequestFactoryMock.xmlHttp.responseText = '[{ "foo": "bar" }]';
-
-					const headers = {
-						firstKey: "mockSetting1",
-						secondKey: "mockSetting2"
-					};
-
-					return getRequest.handleRequest("mockurl/foobar", headers).then(() => {
-
-						expect(setRequestHeaderSpy.getCall(0)).to.have.been.calledWith("firstKey", "mockSetting1");
-						expect(setRequestHeaderSpy.getCall(1)).to.have.been.calledWith("secondKey", "mockSetting2");
-
-					});
-
-				});
-
-			});
-
 		});
 
 	});

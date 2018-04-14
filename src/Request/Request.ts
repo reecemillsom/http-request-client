@@ -7,7 +7,7 @@ export abstract class Request {
 
 	}
 
-	public abstract async handleRequest(url: string, headers?: object);
+	public abstract async handleRequest(url: string, headers?: object, data?: any);
 
 
 	protected setRequestHeaders(xmlHttpRequest: XMLHttpRequest, headers: object) {

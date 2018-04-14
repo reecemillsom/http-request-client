@@ -21,10 +21,22 @@ export class XMLHttpRequestMock {
 
 	}
 
-	public send() {
+	public send(data) {
+
+		if (data) {
+
+
+			return this.onreadystatechange();
+
+		}
 
 
 		this.onload();
+
+
+	}
+
+	public onreadystatechange() {
 
 
 	}
