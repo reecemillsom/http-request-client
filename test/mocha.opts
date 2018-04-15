@@ -1,4 +1,5 @@
-./src/**/*.spec.ts
+src/**/*.spec.ts
+--compilers ts:ts-node/register
 --colours
 --timeout 2000
---reporter dot
+--reporter spec
