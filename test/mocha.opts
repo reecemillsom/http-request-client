@@ -1,5 +1,5 @@
 src/**/*.spec.ts
---compilers ts:ts-node/register
+--require source-map-support/register
 --colours
 --timeout 2000
 --reporter spec
