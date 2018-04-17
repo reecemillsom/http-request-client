@@ -1,7 +1,7 @@
 import * as Bluebird from "bluebird";
 import {Request} from "../Request";
 
-export class PostRequest extends Request {
+export class PutRequest extends Request {
 
 	public async handleRequest(url: string, headers?: object, data?: any) {
 
@@ -11,17 +11,17 @@ export class PostRequest extends Request {
 
 		}
 
-		return await this.postRequest(url, headers, data);
+		return await this.putRequest(url, headers, data);
 
 
 	}
 
 
-	private postRequest(url: string, headers?: object, data?: any) {
+	private putRequest(url: string, headers?: object, data?: any) {
 
 		const xmlHttpRequest = this.xmlHttpRequestFactory.create();
 
-		xmlHttpRequest.open("POST", url, true);
+		xmlHttpRequest.open("PUT", url, true);
 
 		this.setRequestHeaders(xmlHttpRequest, headers);
 
@@ -35,9 +35,10 @@ export class PostRequest extends Request {
 
 				}
 
-				return reject({ error: "POST was unsuccessful", statusCode: xmlHttpRequest.status });
+				return reject({ error: "PUT was unsuccessful", statusCode: xmlHttpRequest.status });
 
 			};
+
 
 			xmlHttpRequest.send(data);
 
@@ -45,10 +46,11 @@ export class PostRequest extends Request {
 
 	}
 
-
 	private isRequestSuccessful(xmlHttpRequest: XMLHttpRequest): boolean {
 
-		return xmlHttpRequest.readyState === 4 && (xmlHttpRequest.status >= 200 && xmlHttpRequest.status < 400);
+		const statusCode = xmlHttpRequest.status;
+
+		return xmlHttpRequest.readyState === 4 && (statusCode >= 200 && statusCode < 400);
 
 	}
 
