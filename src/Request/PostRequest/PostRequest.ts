@@ -27,7 +27,7 @@ export class PostRequest extends Request {
 
 		return new Bluebird((resolve, reject) => {
 
-			xmlHttpRequest.onreadystatechange = () => {
+			xmlHttpRequest.onload = () => {
 
 				if (this.isRequestSuccessful(xmlHttpRequest)) {
 
