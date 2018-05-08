@@ -1,11 +1,12 @@
-const Post = require("../dist/index.js").Post;
+const Put = require("../dist/index.js").Put;
 
 //I tested this by using a fake online rest api called https://jsonplaceholder.typicode.com/
 
-Post.handleRequest("https://jsonplaceholder.typicode.com/posts", null, JSON.stringify({
+Put.handleRequest("https://jsonplaceholder.typicode.com/posts/1", null, JSON.stringify({
     title: 'dog',
+    id: 100,
     body: 'cat',
-    userId: 200
+    userId: 10
 })).then((response) => {
 
     console.log("response>", response);
