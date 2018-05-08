@@ -20,4 +20,12 @@ export abstract class Request {
 
 	}
 
+	protected isRequestSuccessful(xmlHttpRequest: XMLHttpRequest): boolean {
+
+		const statusCode = xmlHttpRequest.status;
+
+		return xmlHttpRequest.readyState === 4 && (statusCode >= 200 && statusCode < 400);
+
+	}
+
 }

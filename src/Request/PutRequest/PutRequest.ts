@@ -7,7 +7,7 @@ export class PutRequest extends Request {
 
 		if (!url) {
 
-			return Bluebird.reject({error: "Please provide a url"});
+			return Bluebird.reject( { error: "Please provide a url" });
 
 		}
 
@@ -46,12 +46,5 @@ export class PutRequest extends Request {
 
 	}
 
-	private isRequestSuccessful(xmlHttpRequest: XMLHttpRequest): boolean {
-
-		const statusCode = xmlHttpRequest.status;
-
-		return xmlHttpRequest.readyState === 4 && (statusCode >= 200 && statusCode < 400);
-
-	}
 
 }

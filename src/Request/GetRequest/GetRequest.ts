@@ -30,7 +30,7 @@ export class GetRequest extends Request {
 
 				if (xmlHttpRequest.readyState === 4) {
 
-					if (!this.isResponseValid(xmlHttpRequest)) {
+					if (!this.isRequestSuccessful(xmlHttpRequest)) {
 
 						return reject({ error: "Request didn't come back valid" });
 
@@ -55,14 +55,6 @@ export class GetRequest extends Request {
 		});
 
 	}
-
-
-	private isResponseValid(xmlHttpRequest: XMLHttpRequest): boolean {
-
-		return xmlHttpRequest.status >= 200 && xmlHttpRequest.status < 400;
-
-	}
-
 
 	private parseResponse(responseText: string): Bluebird<object> {
 
