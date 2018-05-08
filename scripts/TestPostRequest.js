@@ -1,7 +1,6 @@
 const Post = require("../dist/index.js").Post;
 
-// To test actual request I span up a local http server https://docs.python.org/2/library/simplehttpserver.html.
-// Created a file called response.json and requested it with different scenarios to ensure correct things come back.
+//I tested this by using a fake online rest api called https://jsonplaceholder.typicode.com/
 
 Post.handleRequest("https://jsonplaceholder.typicode.com/posts", null, JSON.stringify({
     title: 'dog',
