@@ -1,4 +1,4 @@
-const Put = require("../dist/index.js").Put;
+const Put = require("../dist/index.js").put;
 
 //I tested this by using a fake online rest api called https://jsonplaceholder.typicode.com/
 

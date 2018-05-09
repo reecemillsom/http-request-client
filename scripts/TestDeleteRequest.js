@@ -1,4 +1,4 @@
-const Delete = require("../dist/index").Delete;
+const Delete = require("../dist/index").del;
 
 //I tested this by using a fake online rest api called https://jsonplaceholder.typicode.com/
 

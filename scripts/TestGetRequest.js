@@ -1,4 +1,4 @@
-const Get = require("../dist/index").Get;
+const Get = require("../dist/index").get;
 
 // To test actual request I span up a local http server https://docs.python.org/2/library/simplehttpserver.html.
 // Created a file called response.json and requested it with different scenarios to ensure correct things come back.
