@@ -20,3 +20,7 @@ Example of how to pass headers:
 Return value will be either a error result saying that the request was unsuccessful or successful, or in the case of Get request it may contain a JSON result.
 
 If you wish to see examples of how to use this then look at the scripts directory.
+
+**Cache**
+
+This module used a caching module to store previous get request results for 12 hours. In future I hope to expose this for users to choose how long they wish to store values in cache.
