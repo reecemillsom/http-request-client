@@ -10,6 +10,7 @@
   },
   "author": "Reece Millsom",
   "license": "ISC",
+  "keywords": ["http", "request", "httpclient", "get", "put", "post", "delete"],
   "devDependencies": {
     "@types/bluebird": "^3.5.20",
     "@types/chai": "^4.1.2",
