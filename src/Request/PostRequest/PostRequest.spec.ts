@@ -2,6 +2,8 @@ import * as chai from "chai";
 import {expect} from "chai";
 import * as sinon from "sinon";
 import * as sinonChai from "sinon-chai";
+import {CacheMock} from "../../Cache/CacheMock";
+import {NodeCacheMock} from "../../Cache/NodeCache/NodeCacheMock";
 import {XMLHttpRequestMock} from "../../XMLHttpRequestFactory/XMLHttpRequest/XMLHttpRequestMock";
 import {XMLHttpRequestFactoryMock} from "../../XMLHttpRequestFactory/XMLHttpRequestFactoryMock";
 import {PostRequest} from "./PostRequest";
@@ -16,9 +18,12 @@ describe("PostRequest", () => {
 
 	beforeEach(() => {
 
+		const nodeCacheMock = new NodeCacheMock(),
+			cacheMock = new CacheMock(nodeCacheMock);
+
 		httpFactoryMock = new XMLHttpRequestFactoryMock(XMLHttpRequestMock);
 
-		postRequest = new PostRequest(httpFactoryMock);
+		postRequest = new PostRequest(httpFactoryMock, cacheMock);
 
 	});
 

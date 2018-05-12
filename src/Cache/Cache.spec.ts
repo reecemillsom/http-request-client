@@ -3,7 +3,7 @@ import {Cache} from "./Cache";
 import {NodeCacheMock} from "./NodeCache/NodeCacheMock";
 
 
-describe.only("Cache", () => {
+describe("Cache", () => {
 
 	let nodeCacheMock,
 		cache;
@@ -23,7 +23,7 @@ describe.only("Cache", () => {
 
 	        	nodeCacheMock.set("url", "value");
 
-				expect(cache.execute("url", "value")).to.equal("value");
+				expect(cache.get("url")).to.equal("value");
 
 			});
 	        
@@ -33,7 +33,7 @@ describe.only("Cache", () => {
 
 	    	it("will set the value in cache", () => {
 
-	    	    cache.execute("url", "value");
+	    	    cache.set("url", "value");
 
 	    	    expect(nodeCacheMock.cache["url"]).to.equal("value");
 

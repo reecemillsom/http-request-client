@@ -5,17 +5,15 @@ export class Cache {
 
 	}
 
-	public execute(key: string, value?: any) {
-
-		const cacheValue = this.nodeCache.get(key);
-
-		if (!!cacheValue) {
-
-			return cacheValue;
-
-		}
+	public set(key: string, value: any) {
 
 		return this.nodeCache.set(key, value);
+
+	}
+
+	public get(key) {
+
+		return this.nodeCache.get(key);
 
 	}
 
