@@ -22,7 +22,6 @@ export class CacheMock {
 
 	public set() {
 
-		console.log("args>", arguments);
 
 	}
 
