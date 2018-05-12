@@ -12,7 +12,6 @@ var CacheMock = (function () {
         return;
     };
     CacheMock.prototype.set = function () {
-        console.log("args>", arguments);
     };
     return CacheMock;
 }());

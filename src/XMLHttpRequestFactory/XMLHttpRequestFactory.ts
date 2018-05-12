@@ -1,8 +1,7 @@
-import {XMLHttpRequest} from "xmlhttprequest";
 
 export class XMLHttpRequestFactory {
 
-	constructor(private xmlHttpRequest: XMLHttpRequest) {
+	constructor(private xmlHttpRequest: any) {
 
 	}
 

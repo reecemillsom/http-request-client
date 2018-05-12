@@ -1,7 +1,7 @@
 **Installation and Usage**
 
 1. npm i --save http-request-client
-2. import {Get, Post, Put, Delete} from "http-request-client";
+2. import {get, post, put, del} from "http-request-client";
 
 Each request type has a handle request function. They have 3 params but only one is required.
 
@@ -18,3 +18,5 @@ Example of how to pass headers:
 ```
 
 Return value will be either a error result saying that the request was unsuccessful or successful, or in the case of Get request it may contain a JSON result.
+
+If you wish to see examples of how to use this then look at the scripts directory.
