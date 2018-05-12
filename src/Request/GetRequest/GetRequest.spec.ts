@@ -2,6 +2,8 @@ import * as chai from "chai";
 import {expect} from "chai";
 import * as sinon from "sinon";
 import * as sinonChai from "sinon-chai";
+import {CacheMock} from "../../Cache/CacheMock";
+import {NodeCacheMock} from "../../Cache/NodeCache/NodeCacheMock";
 import {XMLHttpRequestMock} from "../../XMLHttpRequestFactory/XMLHttpRequest/XMLHttpRequestMock";
 import {XMLHttpRequestFactoryMock} from "../../XMLHttpRequestFactory/XMLHttpRequestFactoryMock";
 import {GetRequest} from "./GetRequest";
@@ -10,15 +12,19 @@ chai.use(sinonChai);
 
 describe("GetRequest", () => {
 
-	let xmlHttpRequestFactoryMock: XMLHttpRequestFactoryMock,
+	let cacheMock: CacheMock,
+		xmlHttpRequestFactoryMock: XMLHttpRequestFactoryMock,
 		getRequest: GetRequest,
 		sandbox = sinon.sandbox.create();
 
 	beforeEach(() => {
 
+		const nodeCacheMock = new NodeCacheMock();
+			cacheMock = new CacheMock(nodeCacheMock);
+
 		xmlHttpRequestFactoryMock = new XMLHttpRequestFactoryMock(XMLHttpRequestMock);
 
-		getRequest = new GetRequest(xmlHttpRequestFactoryMock);
+		getRequest = new GetRequest(xmlHttpRequestFactoryMock, cacheMock);
 
 	});
 
@@ -48,6 +54,21 @@ describe("GetRequest", () => {
 
 			});
 
+			describe("when key already exists in cache", () => {
+
+			    it("will return a promise with the stored value", () => {
+
+			    	cacheMock.exists = true;
+
+					return getRequest.handleRequest("mockurl/foobar").then((result) => {
+
+						expect(result).to.deep.equal({ a: 1, b: 2 });
+
+					});
+			    });
+
+			});
+
 			it("will create a new instance of the XMLHttpFactory", () => {
 
 				xmlHttpRequestFactoryMock.xmlHttp.readyState = 4;
@@ -59,6 +80,7 @@ describe("GetRequest", () => {
 					expect(createXMLHttpSpy).to.have.callCount(1);
 
 				});
+
 			});
 
 			describe("when get request is sent", () => {
@@ -101,6 +123,28 @@ describe("GetRequest", () => {
 					});
 
 					describe("if JSON is valid", () => {
+
+						let setSpy;
+
+						beforeEach(() => {
+
+						    setSpy = sinon.spy(cacheMock, "set");
+
+						});
+
+						it("will store the result in cache", () => {
+
+							xmlHttpRequestFactoryMock.xmlHttp.readyState = 4;
+							xmlHttpRequestFactoryMock.xmlHttp.status = 200;
+							xmlHttpRequestFactoryMock.xmlHttp.responseText = '[{ "foo": "bar" }]';
+
+							return getRequest.handleRequest("mockurl/foobar").then((result) => {
+
+								expect(setSpy).to.have.been.calledWith("mockurl/foobar", [ { foo: 'bar' } ]);
+
+							});
+
+						});
 
 						it("will return a valid response JSON", () => {
 

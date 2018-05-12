@@ -15,6 +15,7 @@
     "@types/chai": "^4.1.2",
     "@types/lodash": "^4.14.107",
     "@types/mocha": "^2.2.48",
+    "@types/node-cache": "^4.1.1",
     "@types/sinon": "^4.3.0",
     "@types/sinon-chai": "^2.7.29",
     "chai": "^4.1.2",
@@ -30,6 +31,7 @@
   "dependencies": {
     "bluebird": "^3.5.1",
     "lodash": "^4.17.5",
+    "node-cache": "^4.2.0",
     "xmlhttprequest": "^1.8.0"
   },
   "nyc": {
