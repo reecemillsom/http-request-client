@@ -9,7 +9,7 @@ Params are:
 
 1. Url type string. This is the url you want to do a request to.
 2. Headers type object. This is if you have headers you wish to set when doing a request.
-3. Data you wish to send. This is if you have data to send along with the request. Typically when using a put or delete request.
+3. Data you wish to send. This is if you have data to send along with the request. Typically when using a put or delete request. If you sending JSON, please stringify before passing as a param.
 
 Example of how to pass headers:
 
