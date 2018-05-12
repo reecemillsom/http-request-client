@@ -1,3 +1,7 @@
+**Repository**
+
+<https://github.com/reecemillsom/http-request-client>
+
 **Installation and Usage**
 
 1. npm i --save http-request-client
