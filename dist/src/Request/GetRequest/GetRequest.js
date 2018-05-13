@@ -60,7 +60,7 @@ var GetRequest = (function (_super) {
                         if (!url) {
                             return [2, Bluebird.reject({ error: "Please provide a url" })];
                         }
-                        if (this.isValueInCache()) {
+                        if (this.isValueInCache(url)) {
                             return [2, Bluebird.resolve(this.cache.get(url))];
                         }
                         return [4, this.getResponse(url, headers, data)];
@@ -91,8 +91,8 @@ var GetRequest = (function (_super) {
             xmlHttpRequest.send();
         });
     };
-    GetRequest.prototype.isValueInCache = function () {
-        var cacheValue = this.cache.get("url");
+    GetRequest.prototype.isValueInCache = function (url) {
+        var cacheValue = this.cache.get(url);
         return !!cacheValue;
     };
     GetRequest.prototype.parseResponse = function (responseText) {
