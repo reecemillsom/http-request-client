@@ -6,7 +6,6 @@ import {PostRequest} from "./src/Request/PostRequest/PostRequest";
 import {PutRequest} from "./src/Request/PutRequest/PutRequest";
 import {XMLHttpRequestFactory} from "./src/XMLHttpRequestFactory/XMLHttpRequestFactory";
 
-
 const nodeCache = new NodeCache( { stdTTL: 43200, checkperiod: 300 }),
 	cache = new Cache(nodeCache),
 	factory = new XMLHttpRequestFactory(XMLHttpRequest),

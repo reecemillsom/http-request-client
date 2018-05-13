@@ -11,7 +11,7 @@ export class GetRequest extends Request {
 
 		}
 
-		if (this.isValueInCache()) {
+		if (this.isValueInCache(url)) {
 
 			return Bluebird.resolve(this.cache.get(url));
 
@@ -65,9 +65,9 @@ export class GetRequest extends Request {
 	}
 
 
-	private isValueInCache() {
+	private isValueInCache(url: string) {
 
-		const cacheValue = this.cache.get("url");
+		const cacheValue = this.cache.get(url);
 
 		return !!cacheValue;
 
