@@ -2,7 +2,7 @@ import {expect} from "chai";
 import {RequestMock} from "./Request/RequestMock";
 import {RequestFactory} from "./RequestFactory";
 
-describe.only("RequestFactory", () => {
+describe("RequestFactory", () => {
 
 	let requestFactory;
 

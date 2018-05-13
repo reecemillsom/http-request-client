@@ -4,8 +4,7 @@ import {RequestFactory} from "../../RequestFactory/RequestFactory";
 export class FetchRequest {
 
 
-	constructor(private requestFactory: RequestFactory) {
-
+	constructor(private requestFactory: RequestFactory, private window: any) {
 
 
 	}
@@ -19,7 +18,7 @@ export class FetchRequest {
 		}
 
 		const request = this.requestFactory.create(url, options),
-			response = await fetch(request);
+			response = await this.window.fetch(request);
 
 		if (response.ok) return await response.json();
 
