@@ -38,6 +38,8 @@ To see examples of how to structure each request visit:
 
 <https://github.com/reecemillsom/http-request-client/tree/master/scripts>
 
+These scripts will not run in this context as it has no access to window. Easiest way to test this is to install yourself and use in a project.
+
 **Cache**
 
 This module uses a caching module to store previous get request results for 12 hours.
