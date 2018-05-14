@@ -16,7 +16,7 @@ const nodeCache = new NodeCache( { stdTTL: 43200, checkperiod: 300 }),
 	post = new PostRequest(factory, cache),
 	put = new PutRequest(factory, cache),
 	del = new DeleteRequest(factory, cache),
-	fetch = new FetchRequest(requestFactory, window);
+	fetch = new FetchRequest(requestFactory, window, cache);
 
 export {
 	get,

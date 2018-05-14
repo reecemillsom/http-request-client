@@ -52,7 +52,7 @@ describe("PostRequest", function () {
                 chai_1.expect(sendSpy).to.have.been.calledWith(data);
             });
         });
-        describe("when onreadystatechange is called", function () {
+        describe("when onload is called", function () {
             describe("if readyState is equal to done and status is 200", function () {
                 it("should return a bluebird promise with responseText", function () {
                     var data = {

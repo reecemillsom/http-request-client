@@ -92,7 +92,7 @@ describe("PostRequest", () => {
 
 		});
 
-	    describe("when onreadystatechange is called", () => {
+	    describe("when onload is called", () => {
 
 	        describe("if readyState is equal to done and status is 200", () => {
 
