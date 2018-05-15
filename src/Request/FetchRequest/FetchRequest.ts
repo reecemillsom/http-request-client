@@ -34,7 +34,7 @@ export class FetchRequest {
 	}
 
 
-	private isValueInCache(url: string) {
+	private isValueInCache(url: string): boolean {
 
 		const cacheValue = this.cache.get(url);
 
