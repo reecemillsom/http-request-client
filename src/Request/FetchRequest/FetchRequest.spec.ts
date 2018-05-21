@@ -4,7 +4,7 @@ import {CacheMock} from "../../Cache/CacheMock";
 import {NodeCacheMock} from "../../Cache/NodeCache/NodeCacheMock";
 import {RequestMock} from "../../RequestFactory/Request/RequestMock";
 import {RequestFactoryMock} from "../../RequestFactory/RequestFactoryMock";
-import {WindowMock} from "../Window/WindowMock";
+import {WindowMock} from "../../Window/WindowMock";
 import {FetchRequest} from "./FetchRequest";
 
 

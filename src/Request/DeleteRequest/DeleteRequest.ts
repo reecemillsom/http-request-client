@@ -17,7 +17,7 @@ export class DeleteRequest extends Request {
 	}
 
 
-	private deleteRequest(url: string, headers?: object, data?: any) {
+	private deleteRequest(url: string, headers?: object, data?: any): Bluebird<object> {
 
 		const xmlHttpRequest = this.xmlHttpRequestFactory.create();
 

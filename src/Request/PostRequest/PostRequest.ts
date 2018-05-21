@@ -17,7 +17,7 @@ export class PostRequest extends Request {
 	}
 
 
-	private postRequest(url: string, headers?: object, data?: any) {
+	private postRequest(url: string, headers?: object, data?: any): Bluebird<object> {
 
 		const xmlHttpRequest = this.xmlHttpRequestFactory.create();
 
