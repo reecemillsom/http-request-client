@@ -9,9 +9,9 @@ This project uses XMLHttpRequest from the window, so as long as your projects ha
 **Installation and Usage**
 
 1. npm i --save http-request-client
-2. import {get, post, put, del, fetch} from "http-request-client";
+2. import {get, post, put, del, fetch, head} from "http-request-client";
 
-Request types get, post, put, delete have a handleRequest function which returns a promise result or error. The function has 3 params but only one is required.
+Request types get, post, put, delete, head have a handleRequest function which returns a promise result or error. The function has 3 params but only one is required.
 
 Params are:
 
