@@ -17,7 +17,7 @@ export class PutRequest extends Request {
 	}
 
 
-	private putRequest(url: string, headers?: object, data?: any) {
+	private putRequest(url: string, headers?: object, data?: any): Bluebird<object> {
 
 		const xmlHttpRequest = this.xmlHttpRequestFactory.create();
 

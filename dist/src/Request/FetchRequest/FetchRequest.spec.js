@@ -6,7 +6,7 @@ var CacheMock_1 = require("../../Cache/CacheMock");
 var NodeCacheMock_1 = require("../../Cache/NodeCache/NodeCacheMock");
 var RequestMock_1 = require("../../RequestFactory/Request/RequestMock");
 var RequestFactoryMock_1 = require("../../RequestFactory/RequestFactoryMock");
-var WindowMock_1 = require("../Window/WindowMock");
+var WindowMock_1 = require("../../Window/WindowMock");
 var FetchRequest_1 = require("./FetchRequest");
 describe("FetchRequest", function () {
     var cacheMock, windowMock, requestFactoryMock, fetchRequest;

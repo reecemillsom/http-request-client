@@ -3,6 +3,7 @@ export class XMLHttpRequestMock {
 	public responseText: string;
 	public readyState: number;
 	public status: number;
+	public headers: any;
 
 	constructor() {
 
@@ -20,6 +21,14 @@ export class XMLHttpRequestMock {
 
 
 	}
+
+
+	getAllResponseHeaders() {
+
+		return this.headers;
+
+	}
+
 
 	public send() {
 

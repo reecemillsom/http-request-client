@@ -22,7 +22,7 @@ export class GetRequest extends Request {
 	}
 
 
-	private getResponse(url: string, headers?: object, data?:any):Bluebird<object> {
+	private getResponse(url: string, headers?: object, data?:any): Bluebird<object> {
 
 		const xmlHttpRequest = this.xmlHttpRequestFactory.create();
 

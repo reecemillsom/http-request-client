@@ -7,6 +7,9 @@ var XMLHttpRequestMock = (function () {
     };
     XMLHttpRequestMock.prototype.setRequestHeader = function (header, value) {
     };
+    XMLHttpRequestMock.prototype.getAllResponseHeaders = function () {
+        return this.headers;
+    };
     XMLHttpRequestMock.prototype.send = function () {
         this.onload();
     };
