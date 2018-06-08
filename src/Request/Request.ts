@@ -2,7 +2,7 @@ import * as _ from "lodash";
 
 export abstract class Request {
 
-	constructor(protected xmlHttpRequestFactory: any, protected cache: any) {
+	constructor(protected xmlHttpRequestFactory: any, protected cache?: any) {
 
 
 	}

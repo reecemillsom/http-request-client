@@ -9,24 +9,33 @@ import {PutRequest} from "./src/Request/PutRequest/PutRequest";
 import {RequestFactory} from "./src/RequestFactory/RequestFactory";
 import {XMLHttpRequestFactory} from "./src/XMLHttpRequestFactory/XMLHttpRequestFactory";
 
-const nodeCache = new NodeCache( { stdTTL: 43200, checkperiod: 300 }),
-	cache = new Cache(nodeCache),
-	factory = new XMLHttpRequestFactory(XMLHttpRequest),
-	requestFactory = new RequestFactory(Request),
-	get = new GetRequest(factory, cache),
-	head = new HeadRequest(factory, cache),
-	post = new PostRequest(factory, cache),
-	put = new PutRequest(factory, cache),
-	del = new DeleteRequest(factory, cache),
-	fetch = new FetchRequest(requestFactory, window, cache);
+export function initialiseRequests(cacheOptions?: object) {
 
-export {
-	get,
-	head,
-	post,
-	put,
-	del,
-	fetch
-};
+	const nodeCache = initialiseCache(cacheOptions),
+		cache = new Cache(nodeCache),
+		factory = new XMLHttpRequestFactory(XMLHttpRequest),
+		requestFactory = new RequestFactory(Request);
 
+	return {
+		get: new GetRequest(factory, cache),
+		head: new HeadRequest(factory),
+		post: new PostRequest(factory),
+		put: new PutRequest(factory),
+		del: new DeleteRequest(factory),
+		fetch: new FetchRequest(requestFactory, window, cache)
+	};
+
+}
+
+function initialiseCache(cacheOptions?: object) {
+
+	if (cacheOptions) {
+
+		return new NodeCache(cacheOptions);
+
+	}
+
+	return new NodeCache();
+
+}
 
