@@ -10,10 +10,21 @@ var PostRequest_1 = require("./src/Request/PostRequest/PostRequest");
 var PutRequest_1 = require("./src/Request/PutRequest/PutRequest");
 var RequestFactory_1 = require("./src/RequestFactory/RequestFactory");
 var XMLHttpRequestFactory_1 = require("./src/XMLHttpRequestFactory/XMLHttpRequestFactory");
-var nodeCache = new NodeCache({ stdTTL: 43200, checkperiod: 300 }), cache = new Cache_1.Cache(nodeCache), factory = new XMLHttpRequestFactory_1.XMLHttpRequestFactory(XMLHttpRequest), requestFactory = new RequestFactory_1.RequestFactory(Request), get = new GetRequest_1.GetRequest(factory, cache), head = new HeadRequest_1.HeadRequest(factory, cache), post = new PostRequest_1.PostRequest(factory, cache), put = new PutRequest_1.PutRequest(factory, cache), del = new DeleteRequest_1.DeleteRequest(factory, cache), fetch = new FetchRequest_1.FetchRequest(requestFactory, window, cache);
-exports.get = get;
-exports.head = head;
-exports.post = post;
-exports.put = put;
-exports.del = del;
-exports.fetch = fetch;
+function initialiseRequests(cacheOptions) {
+    var nodeCache = initialiseCache(cacheOptions), cache = new Cache_1.Cache(nodeCache), factory = new XMLHttpRequestFactory_1.XMLHttpRequestFactory(XMLHttpRequest), requestFactory = new RequestFactory_1.RequestFactory(Request);
+    return {
+        get: new GetRequest_1.GetRequest(factory, cache),
+        head: new HeadRequest_1.HeadRequest(factory),
+        post: new PostRequest_1.PostRequest(factory),
+        put: new PutRequest_1.PutRequest(factory),
+        del: new DeleteRequest_1.DeleteRequest(factory),
+        fetch: new FetchRequest_1.FetchRequest(requestFactory, window, cache)
+    };
+}
+exports.initialiseRequests = initialiseRequests;
+function initialiseCache(cacheOptions) {
+    if (cacheOptions) {
+        return new NodeCache(cacheOptions);
+    }
+    return new NodeCache();
+}
