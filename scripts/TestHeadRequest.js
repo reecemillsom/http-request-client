@@ -1,14 +1,9 @@
-const head = require("../dist/index").head;
+const initialiseRequests = require("../dist/index").initialiseRequests,
+    requests = initialiseRequests(); //Can pass the cache config here if you want to make use of it.
 
-head.handleRequest("https://jsonplaceholder.typicode.com/posts").then((result) => {
+requests.head.handleRequest("https://jsonplaceholder.typicode.com/posts").then((response) => {
 
-    console.log("result>");
-
-});
-
-head.handleRequest("https://jsonplaceholder.typicode.com/posts").then((result) => {
-
-    console.log("result>", result);
+    console.log("response>", response);
 
 }).catch((error) => {
 

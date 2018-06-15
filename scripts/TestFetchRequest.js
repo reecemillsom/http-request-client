@@ -1,12 +1,13 @@
-const fetchRequest = require("../dist/index").fetch;
+const initialiseRequests = require("../dist/index").initialiseRequests,
+    requests = initialiseRequests(); //Can pass the cache config here if you want to make use of it.
 
-fetchRequest.handleRequest("https://jsonplaceholder.typicode.com/posts").then((response) => {
+requests.fetch.handleRequest("https://jsonplaceholder.typicode.com/posts").then((response) => {
 
     console.log("response>", response);
 
 });
 
-fetchRequest.handleRequest("https://jsonplaceholder.typicode.com/posts", {
+requests.fetch.handleRequest("https://jsonplaceholder.typicode.com/posts", {
     method: "POST",
     mode: "cors"
 }).then((response) => {

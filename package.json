@@ -18,6 +18,7 @@
     "put",
     "post",
     "delete",
+    "head",
     "fetch"
   ],
   "devDependencies": {

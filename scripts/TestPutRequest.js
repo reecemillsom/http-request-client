@@ -1,8 +1,7 @@
-const Put = require("../dist/index.js").put;
+const initialiseRequests = require("../dist/index").initialiseRequests,
+    requests = initialiseRequests(); //Can pass the cache config here if you want to make use of it.
 
-//I tested this by using a fake online rest api called https://jsonplaceholder.typicode.com/
-
-Put.handleRequest("https://jsonplaceholder.typicode.com/posts/1", null, JSON.stringify({
+requests.put.handleRequest("https://jsonplaceholder.typicode.com/posts/1", null, JSON.stringify({
     title: 'dog',
     id: 100,
     body: 'cat',
