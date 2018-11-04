@@ -45,7 +45,7 @@ export class FetchRequest {
 
 	private async handleResponseBody(url: string, response: any, options: any): Bluebird<object>  {
 
-		const responseBody = await response.json();
+		const responseBody = await this.handleResponseTypes(response);
 
 		if (this.isRequestGet(options)) {
 
@@ -62,6 +62,29 @@ export class FetchRequest {
 	private isRequestGet(options: any): boolean {
 
 		return !options || options.method === "GET";
+
+	}
+
+
+	private async handleResponseTypes(response: any): Bluebird<any> {
+
+		const headers = response.headers.get("content-type");
+
+		switch (headers) {
+
+			case "application/json":
+
+				return Bluebird.resolve(await response.json());
+
+			case "text/html":
+
+				return Bluebird.resolve(await response.text());
+
+			default:
+
+				return Bluebird.resolve(response);
+
+		}
 
 	}
 

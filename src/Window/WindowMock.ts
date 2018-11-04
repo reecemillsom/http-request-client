@@ -3,6 +3,7 @@ import * as Bluebird from "bluebird";
 export class WindowMock {
 
 	public isFetchFine: boolean;
+	public requestType: string;
 
 	public fetch(request: any) {
 
@@ -15,6 +16,14 @@ export class WindowMock {
 
 					return [{ "foo": "bar" }];
 
+				},
+				text: () => {
+
+					return "some text";
+
+				},
+				headers: {
+					get: () => this.requestType
 				}
 			});
 

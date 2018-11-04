@@ -61,7 +61,7 @@ describe("FetchRequest", () => {
 			});
 
 	    });
-	    
+
 	    describe("when request is GET", () => {
 
 	    	let setSpy;
@@ -120,7 +120,7 @@ describe("FetchRequest", () => {
 				});
 
 			});
-	        
+
 	    });
 
 	    describe("when request is not get", () => {
@@ -146,9 +146,9 @@ describe("FetchRequest", () => {
 	        });
 
 	    });
-	    
+
 	    describe("when ok is invalid", () => {
-	    
+
 	        it("will return a rejection message", () => {
 
 				return fetchRequest.handleRequest("mockurl/ok", {}).catch((error) => {
@@ -158,20 +158,64 @@ describe("FetchRequest", () => {
 				});
 
 	        });
-	        
+
 	    });
 
 		describe("when ok is valid", () => {
 
-			it("will resolve the body of the request", () => {
+			describe("when response is json", () => {
 
-				windowMock.isFetchFine = true;
+				it("will resolve the body of the request", () => {
 
-				return fetchRequest.handleRequest("mockurl/ok", {}).then((result) => {
+					windowMock.isFetchFine = true;
+					windowMock.requestType = "application/json";
 
-					expect(result).to.deep.equal([{ "foo": "bar" }]);
+					return fetchRequest.handleRequest("mockurl/ok", {}).then((result) => {
+
+						expect(result).to.deep.equal([{ "foo": "bar" }]);
+
+					});
 
 				});
+
+			});
+
+			describe("when response is text", () => {
+
+			    it("will resolve the text of the request", () => {
+
+			        windowMock.isFetchFine = true;
+			        windowMock.requestType = 'text/html';
+
+			        return fetchRequest.handleRequest("mockurl/ok", {}).then((result) => {
+
+			        	expect(result).to.equal("some text");
+
+					});
+
+			    });
+
+			});
+
+			describe("when response is something else", () => {
+
+			    it("will resolve the content that is returned", () => {
+
+			        windowMock.isFetchFine = true;
+			        windowMock.requestType = "some/other";
+
+					return fetchRequest.handleRequest("mockurl/ok", {}).then((result) => {
+
+						expect(result).to.contain({
+							ok: true,
+							status: 200,
+						});
+
+						expect(result.headers.get()).to.equal("some/other");
+
+					});
+
+			    });
 
 			});
 
