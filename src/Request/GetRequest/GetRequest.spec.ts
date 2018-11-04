@@ -106,15 +106,15 @@ describe("GetRequest", () => {
 
 					describe("if JSON is invalid", () => {
 
-						it("will return a error response", () => {
+						it("will return the value that was fetched", () => {
 
 							xmlHttpRequestFactoryMock.xmlHttp.readyState = 4;
 							xmlHttpRequestFactoryMock.xmlHttp.status = 200;
 							xmlHttpRequestFactoryMock.xmlHttp.responseText = '[{ "foo" "bar" }]';
 
-							return getRequest.handleRequest("mockurl/foobar").catch((error) => {
+							return getRequest.handleRequest("mockurl/foobar").then((response) => {
 
-								expect(error).to.be.a.instanceOf(SyntaxError);
+								expect(response).to.equal('[{ "foo" "bar" }]');
 
 							});
 
@@ -138,7 +138,7 @@ describe("GetRequest", () => {
 							xmlHttpRequestFactoryMock.xmlHttp.status = 200;
 							xmlHttpRequestFactoryMock.xmlHttp.responseText = '[{ "foo": "bar" }]';
 
-							return getRequest.handleRequest("mockurl/foobar").then((result) => {
+							return getRequest.handleRequest("mockurl/foobar").then(() => {
 
 								expect(setSpy).to.have.been.calledWith("mockurl/foobar", [ { foo: 'bar' } ]);
 
