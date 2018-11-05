@@ -22,7 +22,7 @@ export class GetRequest extends Request {
 	}
 
 
-	private getResponse(url: string, headers?: object, data?:any): Bluebird<object> {
+	private getResponse(url: string, headers?: object, data?: any): Bluebird<object> {
 
 		const xmlHttpRequest = this.xmlHttpRequestFactory.create();
 
@@ -42,17 +42,21 @@ export class GetRequest extends Request {
 
 					}
 
-					return this.parseResponse(xmlHttpRequest.responseText).then((response) => {
 
-						this.cache.set(url, response);
+					try {
 
-						return resolve(response);
+						const result = this.parseResponse(xmlHttpRequest.responseText);
 
-					}).catch((error) => {
+						this.cache.set(url, result);
 
-						return reject(error);
+						return resolve(result);
 
-					});
+
+					} catch (error) {
+
+						return resolve(xmlHttpRequest.responseText);
+
+					}
 
 				}
 
@@ -65,22 +69,10 @@ export class GetRequest extends Request {
 	}
 
 
-	private isValueInCache(url: string): boolean {
 
-		const cacheValue = this.cache.get(url);
+	private parseResponse(responseText: string): object {
 
-		return !!cacheValue;
-
-	}
-
-
-	private parseResponse(responseText: string): Bluebird<object> {
-
-		return Bluebird.attempt(() => {
-
-			return JSON.parse(responseText);
-
-		});
+		return JSON.parse(responseText);
 
 	}
 

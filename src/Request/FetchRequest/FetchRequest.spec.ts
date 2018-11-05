@@ -61,7 +61,7 @@ describe("FetchRequest", () => {
 			});
 
 	    });
-	    
+
 	    describe("when request is GET", () => {
 
 	    	let setSpy;
@@ -120,7 +120,7 @@ describe("FetchRequest", () => {
 				});
 
 			});
-	        
+
 	    });
 
 	    describe("when request is not get", () => {
@@ -146,9 +146,9 @@ describe("FetchRequest", () => {
 	        });
 
 	    });
-	    
+
 	    describe("when ok is invalid", () => {
-	    
+
 	        it("will return a rejection message", () => {
 
 				return fetchRequest.handleRequest("mockurl/ok", {}).catch((error) => {
@@ -158,20 +158,45 @@ describe("FetchRequest", () => {
 				});
 
 	        });
-	        
+
 	    });
 
 		describe("when ok is valid", () => {
 
-			it("will resolve the body of the request", () => {
+			describe("when response is json", () => {
 
-				windowMock.isFetchFine = true;
+				it("will resolve json", () => {
 
-				return fetchRequest.handleRequest("mockurl/ok", {}).then((result) => {
+					windowMock.isFetchFine = true;
+					windowMock.jsonContent = '[{ "foo": "bar" }]';
 
-					expect(result).to.deep.equal([{ "foo": "bar" }]);
+					return fetchRequest.handleRequest("mockurl/ok", {}).then((result) => {
+
+						expect(result).to.deep.equal('[{ "foo": "bar" }]');
+
+					});
 
 				});
+
+			});
+
+			describe("when response is not json", () => {
+
+			    it("will resolve the whole response", () => {
+
+			        windowMock.isFetchFine = true;
+			        windowMock.jsonContent = "some text";
+
+			        return fetchRequest.handleRequest("mockurl/ok", {}).then((result) => {
+
+						expect(result).to.contain({
+							ok: true,
+							status: 200,
+						});
+
+					});
+
+			    });
 
 			});
 

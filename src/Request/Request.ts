@@ -28,4 +28,12 @@ export abstract class Request {
 
 	}
 
+	protected isValueInCache(url: string): boolean {
+
+		const cacheValue = this.cache.get(url);
+
+		return !!cacheValue;
+
+	}
+
 }

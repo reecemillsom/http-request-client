@@ -3,6 +3,7 @@ import * as Bluebird from "bluebird";
 export class WindowMock {
 
 	public isFetchFine: boolean;
+	public jsonContent: any;
 
 	public fetch(request: any) {
 
@@ -13,7 +14,11 @@ export class WindowMock {
 				status: 200,
 				json: () => {
 
-					return [{ "foo": "bar" }];
+					if (JSON.parse(this.jsonContent)) {
+
+						return this.jsonContent;
+
+					}
 
 				}
 			});
