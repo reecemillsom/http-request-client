@@ -25,6 +25,8 @@ When calling initialiseRequests whether it be with a cache config or not, it wil
 
 ## GET, POST, PUT, DELETE, HEAD request
 
+GET request tries to parse the response to JSON, if this fails it will return the whole response anyways.
+
 For Request types **get, post, put, delete, head** a handleRequest function should be called which returns a promise result or error. The function has 3 params but only one is required.
 
 Params are:
@@ -40,6 +42,8 @@ Example of how to pass headers:
 ```
 
 ## Fetch request
+
+Fetch request will try to parse the response to JSON, if not it will return the whole response.
 
 Request type **fetch** has a handleRequest function which returns a promise result or error. This function only has 2 params.
 
