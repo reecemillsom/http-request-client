@@ -43,7 +43,7 @@ Example of how to pass headers:
 
 ## Fetch request
 
-Fetch request will try to parse the response to JSON, if not it will return the whole response.
+Fetch request will try to parse the response to JSON, if not it will return the whole response. This means if your content isn't json you can call .blob(), .text() and more for what you need.
 
 Request type **fetch** has a handleRequest function which returns a promise result or error. This function only has 2 params.
 
