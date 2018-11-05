@@ -68,23 +68,19 @@ export class FetchRequest {
 
 	private async handleResponseTypes(response: any): Bluebird<any> {
 
-		const headers = response.headers.get("content-type");
+		let content: any;
 
-		switch (headers) {
+		try {
 
-			case "application/json":
+			content = await response.json();
 
-				return Bluebird.resolve(await response.json());
+		} catch(error) {
 
-			case "text/html":
-
-				return Bluebird.resolve(await response.text());
-
-			default:
-
-				return Bluebird.resolve(response);
+			content = response;
 
 		}
+
+		return Bluebird.resolve(content);
 
 	}
 

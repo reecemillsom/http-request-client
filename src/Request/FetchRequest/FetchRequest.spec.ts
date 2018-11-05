@@ -165,14 +165,14 @@ describe("FetchRequest", () => {
 
 			describe("when response is json", () => {
 
-				it("will resolve the body of the request", () => {
+				it("will resolve json", () => {
 
 					windowMock.isFetchFine = true;
-					windowMock.requestType = "application/json";
+					windowMock.jsonContent = '[{ "foo": "bar" }]';
 
 					return fetchRequest.handleRequest("mockurl/ok", {}).then((result) => {
 
-						expect(result).to.deep.equal([{ "foo": "bar" }]);
+						expect(result).to.deep.equal('[{ "foo": "bar" }]');
 
 					});
 
@@ -180,38 +180,19 @@ describe("FetchRequest", () => {
 
 			});
 
-			describe("when response is text", () => {
+			describe("when response is not json", () => {
 
-			    it("will resolve the text of the request", () => {
+			    it("will resolve the whole response", () => {
 
 			        windowMock.isFetchFine = true;
-			        windowMock.requestType = 'text/html';
+			        windowMock.jsonContent = "some text";
 
 			        return fetchRequest.handleRequest("mockurl/ok", {}).then((result) => {
-
-			        	expect(result).to.equal("some text");
-
-					});
-
-			    });
-
-			});
-
-			describe("when response is something else", () => {
-
-			    it("will resolve the content that is returned", () => {
-
-			        windowMock.isFetchFine = true;
-			        windowMock.requestType = "some/other";
-
-					return fetchRequest.handleRequest("mockurl/ok", {}).then((result) => {
 
 						expect(result).to.contain({
 							ok: true,
 							status: 200,
 						});
-
-						expect(result.headers.get()).to.equal("some/other");
 
 					});
 
