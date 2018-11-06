@@ -4,8 +4,7 @@ import {RequestFactory} from "../../RequestFactory/RequestFactory";
 
 export class FetchRequest {
 
-
-	constructor(private requestFactory: RequestFactory, private window: any, private cache: Cache) {
+	constructor(private requestFactory: RequestFactory, private window: any, private cache?: Cache) {
 
 
 	}
@@ -18,7 +17,7 @@ export class FetchRequest {
 
 		}
 
-		if (this.isValueInCache(url)) {
+		if (this.isCachePresent() && this.isValueInCache(url)) {
 
 			return Bluebird.resolve(this.cache.get(url));
 
@@ -47,7 +46,7 @@ export class FetchRequest {
 
 		const responseBody = await this.handleResponseTypes(response);
 
-		if (this.isRequestGet(options)) {
+		if (this.isRequestGet(options) && this.isCachePresent()) {
 
 			this.cache.set(url, responseBody);
 
@@ -81,6 +80,12 @@ export class FetchRequest {
 		}
 
 		return Bluebird.resolve(content);
+
+	}
+
+	isCachePresent(): boolean {
+
+		return !!this.cache;
 
 	}
 
