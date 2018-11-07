@@ -2,9 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var _ = require("lodash");
 var Request = (function () {
-    function Request(xmlHttpRequestFactory, cache) {
+    function Request(xmlHttpRequestFactory) {
         this.xmlHttpRequestFactory = xmlHttpRequestFactory;
-        this.cache = cache;
     }
     Request.prototype.setRequestHeaders = function (xmlHttpRequest, headers) {
         _.each(headers, function (value, key) {

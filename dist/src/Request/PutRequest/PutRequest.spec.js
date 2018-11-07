@@ -4,8 +4,6 @@ var chai = require("chai");
 var chai_1 = require("chai");
 var sinon = require("sinon");
 var sinonChai = require("sinon-chai");
-var CacheMock_1 = require("../../Cache/CacheMock");
-var NodeCacheMock_1 = require("../../Cache/NodeCache/NodeCacheMock");
 var XMLHttpRequestMock_1 = require("../../XMLHttpRequestFactory/XMLHttpRequest/XMLHttpRequestMock");
 var XMLHttpRequestFactoryMock_1 = require("../../XMLHttpRequestFactory/XMLHttpRequestFactoryMock");
 var PutRequest_1 = require("./PutRequest");
@@ -13,9 +11,8 @@ chai.use(sinonChai);
 describe("PutRequest", function () {
     var putRequest, xmlHttpRequestFactoryMock;
     beforeEach(function () {
-        var nodeCacheMock = new NodeCacheMock_1.NodeCacheMock(), cacheMock = new CacheMock_1.CacheMock(nodeCacheMock);
         xmlHttpRequestFactoryMock = new XMLHttpRequestFactoryMock_1.XMLHttpRequestFactoryMock(XMLHttpRequestMock_1.XMLHttpRequestMock);
-        putRequest = new PutRequest_1.PutRequest(xmlHttpRequestFactoryMock, cacheMock);
+        putRequest = new PutRequest_1.PutRequest(xmlHttpRequestFactoryMock);
     });
     describe("when no url is provided", function () {
         it("will return a rejection with the appropriate message", function () {

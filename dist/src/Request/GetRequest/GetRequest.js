@@ -60,9 +60,6 @@ var GetRequest = (function (_super) {
                         if (!url) {
                             return [2, Bluebird.reject({ error: "Please provide a url" })];
                         }
-                        if (this.isValueInCache(url)) {
-                            return [2, Bluebird.resolve(this.cache.get(url))];
-                        }
                         return [4, this.getResponse(url, headers, data)];
                     case 1: return [2, _a.sent()];
                 }
@@ -80,25 +77,20 @@ var GetRequest = (function (_super) {
                     if (!_this.isRequestSuccessful(xmlHttpRequest)) {
                         return reject({ error: "Request didn't come back valid" });
                     }
-                    return _this.parseResponse(xmlHttpRequest.responseText).then(function (response) {
-                        _this.cache.set(url, response);
-                        return resolve(response);
-                    }).catch(function (error) {
-                        return reject(error);
-                    });
+                    try {
+                        var result = _this.parseResponse(xmlHttpRequest.responseText);
+                        return resolve(result);
+                    }
+                    catch (error) {
+                        return resolve(xmlHttpRequest.responseText);
+                    }
                 }
             };
             xmlHttpRequest.send();
         });
     };
-    GetRequest.prototype.isValueInCache = function (url) {
-        var cacheValue = this.cache.get(url);
-        return !!cacheValue;
-    };
     GetRequest.prototype.parseResponse = function (responseText) {
-        return Bluebird.attempt(function () {
-            return JSON.parse(responseText);
-        });
+        return JSON.parse(responseText);
     };
     return GetRequest;
 }(Request_1.Request));

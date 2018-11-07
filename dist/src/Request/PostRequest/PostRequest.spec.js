@@ -4,8 +4,6 @@ var chai = require("chai");
 var chai_1 = require("chai");
 var sinon = require("sinon");
 var sinonChai = require("sinon-chai");
-var CacheMock_1 = require("../../Cache/CacheMock");
-var NodeCacheMock_1 = require("../../Cache/NodeCache/NodeCacheMock");
 var XMLHttpRequestMock_1 = require("../../XMLHttpRequestFactory/XMLHttpRequest/XMLHttpRequestMock");
 var XMLHttpRequestFactoryMock_1 = require("../../XMLHttpRequestFactory/XMLHttpRequestFactoryMock");
 var PostRequest_1 = require("./PostRequest");
@@ -13,9 +11,8 @@ chai.use(sinonChai);
 describe("PostRequest", function () {
     var postRequest, httpFactoryMock, sandbox = sinon.sandbox.create();
     beforeEach(function () {
-        var nodeCacheMock = new NodeCacheMock_1.NodeCacheMock(), cacheMock = new CacheMock_1.CacheMock(nodeCacheMock);
         httpFactoryMock = new XMLHttpRequestFactoryMock_1.XMLHttpRequestFactoryMock(XMLHttpRequestMock_1.XMLHttpRequestMock);
-        postRequest = new PostRequest_1.PostRequest(httpFactoryMock, cacheMock);
+        postRequest = new PostRequest_1.PostRequest(httpFactoryMock);
     });
     afterEach(function () {
         sandbox.restore();
