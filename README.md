@@ -1,5 +1,4 @@
 **Repository**
-//TODO remember to update this is where needed after major refactoring.
 
 <https://github.com/reecemillsom/http-request-client>
 
