@@ -11,12 +11,6 @@ export class GetRequest extends Request {
 
 		}
 
-		if (this.isCachePresent() && this.isValueInCache(url)) {
-
-			return Bluebird.resolve(this.cache.get(url));
-
-		}
-
 		return await this.getResponse(url, headers, data);
 
 	}
@@ -47,12 +41,6 @@ export class GetRequest extends Request {
 
 						const result = this.parseResponse(xmlHttpRequest.responseText);
 
-						if (this.isCachePresent()) {
-
-							this.cache.set(url, result);
-
-						}
-
 						return resolve(result);
 
 
@@ -77,13 +65,6 @@ export class GetRequest extends Request {
 	private parseResponse(responseText: string): object {
 
 		return JSON.parse(responseText);
-
-	}
-
-
-	protected isCachePresent() {
-
-		return !!this.cache;
 
 	}
 

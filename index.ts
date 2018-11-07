@@ -1,5 +1,3 @@
-import * as NodeCache from "node-cache";
-import {Cache} from "./src/Cache/Cache";
 import {DeleteRequest} from "./src/Request/DeleteRequest/DeleteRequest";
 import {FetchRequest} from "./src/Request/FetchRequest/FetchRequest";
 import {GetRequest} from "./src/Request/GetRequest/GetRequest";
@@ -18,8 +16,6 @@ export {
 	FetchRequest as Fetch,
 	XMLHttpRequestFactory as XMLHttpFactory,
 	RequestFactory as FetchRequestFactory,
-	Cache as Cache,
-	NodeCache as NodeCache
 }
 
 

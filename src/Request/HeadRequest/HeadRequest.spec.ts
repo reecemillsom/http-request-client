@@ -2,8 +2,6 @@ import * as chai from "chai";
 import {expect} from "chai";
 import * as sinon from "sinon";
 import * as sinonChai from "sinon-chai";
-import {CacheMock} from "../../Cache/CacheMock";
-import {NodeCacheMock} from "../../Cache/NodeCache/NodeCacheMock";
 import {XMLHttpRequestMock} from "../../XMLHttpRequestFactory/XMLHttpRequest/XMLHttpRequestMock";
 import {XMLHttpRequestFactoryMock} from "../../XMLHttpRequestFactory/XMLHttpRequestFactoryMock";
 import {HeadRequest} from "./HeadRequest";
@@ -12,18 +10,14 @@ chai.use(sinonChai);
 
 describe("HeadRequest", () => {
 
-	let cacheMock: CacheMock,
-		xmlHttpRequestFactoryMock: XMLHttpRequestFactoryMock,
+	let xmlHttpRequestFactoryMock: XMLHttpRequestFactoryMock,
 		headRequest: HeadRequest;
 
 	beforeEach(() => {
 
-		const nodeCacheMock = new NodeCacheMock();
-		cacheMock = new CacheMock(nodeCacheMock);
-
 		xmlHttpRequestFactoryMock = new XMLHttpRequestFactoryMock(XMLHttpRequestMock);
 
-		headRequest = new HeadRequest(xmlHttpRequestFactoryMock, cacheMock);
+		headRequest = new HeadRequest(xmlHttpRequestFactoryMock);
 
 	});
 

@@ -2,8 +2,6 @@ import * as chai from "chai";
 import {expect} from "chai";
 import * as sinon from "sinon";
 import * as sinonChai from "sinon-chai";
-import {CacheMock} from "../Cache/CacheMock";
-import {NodeCacheMock} from "../Cache/NodeCache/NodeCacheMock";
 import {XMLHttpRequestMock} from "../XMLHttpRequestFactory/XMLHttpRequest/XMLHttpRequestMock";
 import {XMLHttpRequestFactoryMock} from "../XMLHttpRequestFactory/XMLHttpRequestFactoryMock";
 import {Request} from "./Request";
@@ -12,9 +10,9 @@ chai.use(sinonChai);
 
 class MockClass extends Request {
 
-	constructor(httpRequestFactory, cache) {
+	constructor(httpRequestFactory) {
 
-		super(httpRequestFactory, cache);
+		super(httpRequestFactory);
 
 	}
 
@@ -35,12 +33,9 @@ describe("Request", () => {
 
 	before(() => {
 
-		const nodeCacheMock = new NodeCacheMock(),
-			cacheMock = new CacheMock(nodeCacheMock);
-
 		httpRequestFactoryMock = new XMLHttpRequestFactoryMock(XMLHttpRequestMock);
 
-		mockClass = new MockClass(httpRequestFactoryMock, cacheMock);
+		mockClass = new MockClass(httpRequestFactoryMock);
 
 	});
 

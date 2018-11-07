@@ -1,7 +1,5 @@
 import {expect} from "chai";
 import * as sinon from "sinon";
-import {CacheMock} from "../../Cache/CacheMock";
-import {NodeCacheMock} from "../../Cache/NodeCache/NodeCacheMock";
 import {RequestMock} from "../../RequestFactory/Request/RequestMock";
 import {RequestFactoryMock} from "../../RequestFactory/RequestFactoryMock";
 import {WindowMock} from "../../Window/WindowMock";
@@ -10,19 +8,15 @@ import {FetchRequest} from "./FetchRequest";
 
 describe("FetchRequest", () => {
 
-	let cacheMock,
-		windowMock,
+	let windowMock,
 		requestFactoryMock,
 		fetchRequest;
 
 	beforeEach(() => {
 
-		const nodeCacheMock = new NodeCacheMock();
-
-		cacheMock = new CacheMock(nodeCacheMock);
 		windowMock = new WindowMock();
 		requestFactoryMock = new RequestFactoryMock(RequestMock);
-	    fetchRequest = new FetchRequest(requestFactoryMock, windowMock, cacheMock);
+	    fetchRequest = new FetchRequest(requestFactoryMock, windowMock);
 
 	});
 
@@ -62,90 +56,6 @@ describe("FetchRequest", () => {
 
 	    });
 
-	    describe("when request is GET", () => {
-
-	    	let setSpy;
-
-	    	beforeEach(() => {
-
-	    	    setSpy = sinon.spy(cacheMock, "set");
-
-	    	});
-
-	    	describe("if key already exists in cache", () => {
-
-	    	    it("should return the cached value", () => {
-
-					cacheMock.exists = true;
-					windowMock.isFetchFine = true;
-
-					return fetchRequest.handleRequest("mockurl").then((result) => {
-
-						expect(result).to.deep.equal({ a: 1, b: 2 });
-
-					});
-
-	    	    });
-
-	    	});
-
-	    	describe("when no options are passed", () => {
-
-				it("should store the value in cache", () => {
-
-					windowMock.isFetchFine = true;
-
-					return fetchRequest.handleRequest("mockurl").then(() => {
-
-						expect(setSpy).to.have.callCount(1);
-
-					});
-
-				});
-
-	    	});
-
-			describe("when options method are passed", () => {
-
-				it("should store the value in cache", () => {
-
-					windowMock.isFetchFine = true;
-
-					return fetchRequest.handleRequest("mockurl", { method: "GET" }).then(() => {
-
-						expect(setSpy).to.have.callCount(1);
-
-					});
-
-				});
-
-			});
-
-	    });
-
-	    describe("when request is not get", () => {
-
-			let setSpy;
-
-			beforeEach(() => {
-
-				setSpy = sinon.spy(cacheMock, "set");
-
-			});
-
-	        it("should not store any values in cache", () => {
-
-				windowMock.isFetchFine = true;
-
-				return fetchRequest.handleRequest("mockurl", { method: "POST" }).then(() => {
-
-					expect(setSpy).to.have.callCount(0);
-
-				});
-
-	        });
-
-	    });
 
 	    describe("when ok is invalid", () => {
 
