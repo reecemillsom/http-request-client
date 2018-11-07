@@ -1,9 +1,13 @@
-const initialiseRequests = require("../dist/index").initialiseRequests,
-    requests = initialiseRequests(); //Can pass the cache config here if you want to make use of it.
+const Head = require('../dist/index').Head,
+    XMLHttpFactory = require('../dist/index').XMLHttpFactory;
 
-requests.head.handleRequest("https://jsonplaceholder.typicode.com/posts").then((response) => {
+const xmlHttpFactory = new XMLHttpFactory(XMLHttpRequest);
+const head = new Head(xmlHttpFactory);
 
-    console.log("response>", response);
+
+head.handleRequest("https://jsonplaceholder.typicode.com/posts").then((response) => {
+
+    console.log('response>', response);
 
 }).catch((error) => {
 
