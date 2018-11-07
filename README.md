@@ -1,4 +1,5 @@
 **Repository**
+//TODO remember to update this is where needed after major refactoring.
 
 <https://github.com/reecemillsom/http-request-client>
 
@@ -9,19 +10,24 @@ This project uses XMLHttpRequest from the window and the fetch function dependin
 ## Installation and Usage
 
 1. npm i --save http-request-client
-2. import { initialiseRequests } from "http-request-client";
+2. import { Get, Head, Post, Put, Del, Fetch, XMLHttpFactory, FetchRequestFactory } from "http-request-client";
 
-initialiseRequests is a function which allows an optional cache config to be passed in as a parameter as an object:
+For all XMLHttpRequest types e.g. Get, Head, Post, Put, Del:
 
 ```
-    initialiseRequests(); or initialiseRequests({ stdTTL: 32000 });
+    const xmlHttpFactory = new XMLHttpFactory(XMLHttpRequest);
+    const get = new Get(xmlHttpFactory);
 ```
 
-To look at the options you can enter for the cache: <https://www.npmjs.com/package/node-cache#options>
+For Fetch:
 
-Currently caching results is only used for GET request and if fetch method is GET. The config you pass will determine how long for etc, depending on the options you pass.
 
-When calling initialiseRequests whether it be with a cache config or not, it will return you all request types as an object. e.g. get, post, put, delete, head, fetch which all have a handleRequest function which will either return a promise or error.
+```
+    const requestFactory = new FetchRequestFactory(Request);
+    const fetch = new Fetch(requestFactory, window);
+```
+
+All of the above have a handleRequest function that is the entry for all requests which can be called once the request class is instantiated.
 
 ## GET, POST, PUT, DELETE, HEAD request
 
@@ -52,7 +58,7 @@ Request type **fetch** has a handleRequest function which returns a promise resu
 1. **Url type string required**. This is the url you want to do a request to.
 2. **Options type object**. This is to be able to change type of request e.g. POST, GET or maybe change cache rules etc. To see full list of options visit: <https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch> and look at the init param options. By default fetch request does a GET request.
 
-If using fetch be aware the current support of this function is for more recent browser versions, so use it if your not bothered about supporting older versions.
+If using fetch be aware the current support of this function is for more recent browser versions, so use it if your not bothered about supporting older versions or do not need certain functionality.
 
 ## Examples of requests
 

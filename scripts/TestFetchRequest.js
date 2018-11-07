@@ -1,7 +1,7 @@
 const Fetch = require('../dist/index').Fetch,
     RequestFactory = require('../dist/index').FetchRequestFactory;
 
-const requestFactory = new RequestFactory(XMLHttpRequest);
+const requestFactory = new RequestFactory(Request);
 const fetch = new Fetch(requestFactory, window);
 
 
