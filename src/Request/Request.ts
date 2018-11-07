@@ -2,7 +2,7 @@ import * as _ from "lodash";
 
 export abstract class Request {
 
-	constructor(protected xmlHttpRequestFactory: any, protected cache?: any) {
+	constructor(protected xmlHttpRequestFactory: any) {
 
 
 	}
@@ -25,14 +25,6 @@ export abstract class Request {
 		const statusCode = xmlHttpRequest.status;
 
 		return xmlHttpRequest.readyState === 4 && (statusCode >= 200 && statusCode < 400);
-
-	}
-
-	protected isValueInCache(url: string): boolean {
-
-		const cacheValue = this.cache.get(url);
-
-		return !!cacheValue;
 
 	}
 

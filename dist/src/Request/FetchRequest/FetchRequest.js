@@ -37,10 +37,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var Bluebird = require("bluebird");
 var FetchRequest = (function () {
-    function FetchRequest(requestFactory, window, cache) {
+    function FetchRequest(requestFactory, window) {
         this.requestFactory = requestFactory;
         this.window = window;
-        this.cache = cache;
     }
     FetchRequest.prototype.handleRequest = function (url, options) {
         return __awaiter(this, void 0, void 0, function () {
@@ -51,42 +50,49 @@ var FetchRequest = (function () {
                         if (!url) {
                             return [2, Bluebird.reject({ error: "Please provide a url" })];
                         }
-                        if (this.isValueInCache(url)) {
-                            return [2, Bluebird.resolve(this.cache.get(url))];
-                        }
                         request = this.requestFactory.create(url, options);
                         return [4, this.window.fetch(request)];
                     case 1:
                         response = _a.sent();
                         if (response.ok)
-                            return [2, this.handleResponseBody(url, response, options)];
+                            return [2, this.handleResponseBody(response)];
                         return [2, Bluebird.reject({ error: "Failed to fetch", statusCode: response.status })];
                 }
             });
         });
     };
-    FetchRequest.prototype.isValueInCache = function (url) {
-        var cacheValue = this.cache.get(url);
-        return !!cacheValue;
-    };
-    FetchRequest.prototype.handleResponseBody = function (url, response, options) {
+    FetchRequest.prototype.handleResponseBody = function (response) {
         return __awaiter(this, void 0, Bluebird, function () {
             var responseBody;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4, response.json()];
+                    case 0: return [4, this.handleResponseTypes(response)];
                     case 1:
                         responseBody = _a.sent();
-                        if (this.isRequestGet(options)) {
-                            this.cache.set(url, responseBody);
-                        }
                         return [2, Bluebird.resolve(responseBody)];
                 }
             });
         });
     };
-    FetchRequest.prototype.isRequestGet = function (options) {
-        return !options || options.method === "GET";
+    FetchRequest.prototype.handleResponseTypes = function (response) {
+        return __awaiter(this, void 0, Bluebird, function () {
+            var content, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4, response.json()];
+                    case 1:
+                        content = _a.sent();
+                        return [3, 3];
+                    case 2:
+                        error_1 = _a.sent();
+                        content = response;
+                        return [3, 3];
+                    case 3: return [2, Bluebird.resolve(content)];
+                }
+            });
+        });
     };
     return FetchRequest;
 }());

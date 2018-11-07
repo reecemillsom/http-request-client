@@ -4,19 +4,15 @@ var chai = require("chai");
 var chai_1 = require("chai");
 var sinon = require("sinon");
 var sinonChai = require("sinon-chai");
-var CacheMock_1 = require("../../Cache/CacheMock");
-var NodeCacheMock_1 = require("../../Cache/NodeCache/NodeCacheMock");
 var XMLHttpRequestMock_1 = require("../../XMLHttpRequestFactory/XMLHttpRequest/XMLHttpRequestMock");
 var XMLHttpRequestFactoryMock_1 = require("../../XMLHttpRequestFactory/XMLHttpRequestFactoryMock");
 var HeadRequest_1 = require("./HeadRequest");
 chai.use(sinonChai);
 describe("HeadRequest", function () {
-    var cacheMock, xmlHttpRequestFactoryMock, headRequest;
+    var xmlHttpRequestFactoryMock, headRequest;
     beforeEach(function () {
-        var nodeCacheMock = new NodeCacheMock_1.NodeCacheMock();
-        cacheMock = new CacheMock_1.CacheMock(nodeCacheMock);
         xmlHttpRequestFactoryMock = new XMLHttpRequestFactoryMock_1.XMLHttpRequestFactoryMock(XMLHttpRequestMock_1.XMLHttpRequestMock);
-        headRequest = new HeadRequest_1.HeadRequest(xmlHttpRequestFactoryMock, cacheMock);
+        headRequest = new HeadRequest_1.HeadRequest(xmlHttpRequestFactoryMock);
     });
     describe("when no url is provided", function () {
         it("should return an appropriate error", function () {

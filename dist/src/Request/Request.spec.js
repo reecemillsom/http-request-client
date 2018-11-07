@@ -14,16 +14,14 @@ var chai = require("chai");
 var chai_1 = require("chai");
 var sinon = require("sinon");
 var sinonChai = require("sinon-chai");
-var CacheMock_1 = require("../Cache/CacheMock");
-var NodeCacheMock_1 = require("../Cache/NodeCache/NodeCacheMock");
 var XMLHttpRequestMock_1 = require("../XMLHttpRequestFactory/XMLHttpRequest/XMLHttpRequestMock");
 var XMLHttpRequestFactoryMock_1 = require("../XMLHttpRequestFactory/XMLHttpRequestFactoryMock");
 var Request_1 = require("./Request");
 chai.use(sinonChai);
 var MockClass = (function (_super) {
     __extends(MockClass, _super);
-    function MockClass(httpRequestFactory, cache) {
-        return _super.call(this, httpRequestFactory, cache) || this;
+    function MockClass(httpRequestFactory) {
+        return _super.call(this, httpRequestFactory) || this;
     }
     MockClass.prototype.handleRequest = function (url, headers, data) {
         var xmlHttpRequest = this.xmlHttpRequestFactory.create();
@@ -34,9 +32,8 @@ var MockClass = (function (_super) {
 describe("Request", function () {
     var mockClass, httpRequestFactoryMock;
     before(function () {
-        var nodeCacheMock = new NodeCacheMock_1.NodeCacheMock(), cacheMock = new CacheMock_1.CacheMock(nodeCacheMock);
         httpRequestFactoryMock = new XMLHttpRequestFactoryMock_1.XMLHttpRequestFactoryMock(XMLHttpRequestMock_1.XMLHttpRequestMock);
-        mockClass = new MockClass(httpRequestFactoryMock, cacheMock);
+        mockClass = new MockClass(httpRequestFactoryMock);
     });
     describe("when set request headers is called", function () {
         describe("when headers are provided", function () {

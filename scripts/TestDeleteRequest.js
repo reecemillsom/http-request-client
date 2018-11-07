@@ -1,9 +1,13 @@
-const initialiseRequests = require("../dist/index").initialiseRequests,
-    requests = initialiseRequests(); //Can pass the cache config here if you want to make use of it.
+const Del = require('../dist/index').Del,
+    XMLHttpFactory = require('../dist/index').XMLHttpFactory;
 
-requests.del.handleRequest("https://jsonplaceholder.typicode.com/posts/1").then((response) => {
+const xmlHttpFactory = new XMLHttpFactory(XMLHttpRequest);
+const del = new Del(xmlHttpFactory);
 
-    console.log("response>", response);
+
+del.handleRequest("https://jsonplaceholder.typicode.com/posts/1").then((response) => {
+
+    console.log('response>', response);
 
 }).catch((error) => {
 

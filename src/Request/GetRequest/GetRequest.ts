@@ -11,12 +11,6 @@ export class GetRequest extends Request {
 
 		}
 
-		if (this.isValueInCache(url)) {
-
-			return Bluebird.resolve(this.cache.get(url));
-
-		}
-
 		return await this.getResponse(url, headers, data);
 
 	}
@@ -46,8 +40,6 @@ export class GetRequest extends Request {
 					try {
 
 						const result = this.parseResponse(xmlHttpRequest.responseText);
-
-						this.cache.set(url, result);
 
 						return resolve(result);
 

@@ -1,30 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var NodeCache = require("node-cache");
-var Cache_1 = require("./src/Cache/Cache");
 var DeleteRequest_1 = require("./src/Request/DeleteRequest/DeleteRequest");
+exports.Del = DeleteRequest_1.DeleteRequest;
 var FetchRequest_1 = require("./src/Request/FetchRequest/FetchRequest");
+exports.Fetch = FetchRequest_1.FetchRequest;
 var GetRequest_1 = require("./src/Request/GetRequest/GetRequest");
+exports.Get = GetRequest_1.GetRequest;
 var HeadRequest_1 = require("./src/Request/HeadRequest/HeadRequest");
+exports.Head = HeadRequest_1.HeadRequest;
 var PostRequest_1 = require("./src/Request/PostRequest/PostRequest");
+exports.Post = PostRequest_1.PostRequest;
 var PutRequest_1 = require("./src/Request/PutRequest/PutRequest");
+exports.Put = PutRequest_1.PutRequest;
 var RequestFactory_1 = require("./src/RequestFactory/RequestFactory");
+exports.FetchRequestFactory = RequestFactory_1.RequestFactory;
 var XMLHttpRequestFactory_1 = require("./src/XMLHttpRequestFactory/XMLHttpRequestFactory");
-function initialiseRequests(cacheOptions) {
-    var nodeCache = initialiseCache(cacheOptions), cache = new Cache_1.Cache(nodeCache), factory = new XMLHttpRequestFactory_1.XMLHttpRequestFactory(XMLHttpRequest), requestFactory = new RequestFactory_1.RequestFactory(Request);
-    return {
-        get: new GetRequest_1.GetRequest(factory, cache),
-        head: new HeadRequest_1.HeadRequest(factory),
-        post: new PostRequest_1.PostRequest(factory),
-        put: new PutRequest_1.PutRequest(factory),
-        del: new DeleteRequest_1.DeleteRequest(factory),
-        fetch: new FetchRequest_1.FetchRequest(requestFactory, window, cache)
-    };
-}
-exports.initialiseRequests = initialiseRequests;
-function initialiseCache(cacheOptions) {
-    if (cacheOptions) {
-        return new NodeCache(cacheOptions);
-    }
-    return new NodeCache();
-}
+exports.XMLHttpFactory = XMLHttpRequestFactory_1.XMLHttpRequestFactory;

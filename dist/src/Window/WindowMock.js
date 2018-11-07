@@ -5,12 +5,15 @@ var WindowMock = (function () {
     function WindowMock() {
     }
     WindowMock.prototype.fetch = function (request) {
+        var _this = this;
         if (this.isFetchFine) {
             return Bluebird.resolve({
                 ok: true,
                 status: 200,
                 json: function () {
-                    return [{ "foo": "bar" }];
+                    if (JSON.parse(_this.jsonContent)) {
+                        return _this.jsonContent;
+                    }
                 }
             });
         }
