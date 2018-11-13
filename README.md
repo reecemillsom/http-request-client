@@ -20,7 +20,7 @@ For all XMLHttpRequest types e.g. Get, Head, Post, Put, Del:
 
 For Fetch:
 
-
+//TODO update the fetch = line so doesn't have window injected.
 ```
     const requestFactory = new FetchRequestFactory(Request);
     const fetch = new Fetch(requestFactory, window);

@@ -3,6 +3,7 @@ import {RequestFactory} from "../../RequestFactory/RequestFactory";
 
 export class FetchRequest {
 
+  	//TODO remove window from here as a parameter
 	constructor(private requestFactory: RequestFactory, private window: any) {
 
 
@@ -16,6 +17,7 @@ export class FetchRequest {
 
 		}
 
+		//TODO this.window remove. Just call fetch as a function
 		const request = this.requestFactory.create(url, options),
 			response = await this.window.fetch(request);
 
