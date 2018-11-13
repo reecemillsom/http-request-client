@@ -5,7 +5,7 @@ import {RequestFactoryMock} from "../../RequestFactory/RequestFactoryMock";
 import {WindowMock} from "../../Window/WindowMock";
 import {FetchRequest} from "./FetchRequest";
 
-
+//TODO update tests to reflect no window mock needed.
 describe("FetchRequest", () => {
 
 	let windowMock,

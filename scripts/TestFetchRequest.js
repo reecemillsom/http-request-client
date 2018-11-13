@@ -1,6 +1,8 @@
 const Fetch = require('../dist/index').Fetch,
     RequestFactory = require('../dist/index').FetchRequestFactory;
 
+//TODO update the script examples appropriately to refelect no window injection.
+
 const requestFactory = new RequestFactory(Request);
 const fetch = new Fetch(requestFactory, window);
 
