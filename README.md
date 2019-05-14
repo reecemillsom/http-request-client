@@ -7,6 +7,7 @@
 [![codecov](https://img.shields.io/david/reecemillsom/http-request-client.svg)](https://codecov.io/gh/reecemillsom/http-request-client)
   
 
+
 ## Point to Note
 
 This project uses XMLHttpRequest from the window and the fetch function depending on which request you do, so as long as your projects have access to the DOM this will work.
