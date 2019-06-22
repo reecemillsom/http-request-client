@@ -1,6 +1,6 @@
 {
   "name": "http-request-client",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "description": "Http Client wrapper for doing requests",
   "main": "./dist/index.js",
   "scripts": {
@@ -16,6 +16,7 @@
     "httpclient",
     "get",
     "put",
+    "patch",
     "post",
     "delete",
     "head",

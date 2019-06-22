@@ -15,9 +15,9 @@ This project uses XMLHttpRequest from the window and the fetch function dependin
 ## Installation and Usage
 
 1. npm i --save http-request-client
-2. import { Get, Head, Post, Put, Del, Fetch, XMLHttpFactory, FetchRequestFactory } from "http-request-client";
+2. import { Get, Head, Patch, Post, Put, Del, Fetch, XMLHttpFactory, FetchRequestFactory } from "http-request-client";
 
-For all XMLHttpRequest types e.g. Get, Head, Post, Put, Del:
+For all XMLHttpRequest types e.g. Get, Head, Patch, Post, Put, Del:
 
 ```
     const xmlHttpFactory = new XMLHttpFactory(XMLHttpRequest);
@@ -34,11 +34,11 @@ For Fetch:
 
 All of the above have a handleRequest function that is the entry for all requests which can be called once the request class is instantiated.
 
-## GET, POST, PUT, DELETE, HEAD request
+## GET, POST, PATCH, PUT, DELETE, HEAD request
 
 GET request tries to parse the response to JSON, if this fails it will return the whole response anyways.
 
-For Request types **get, post, put, delete, head** a handleRequest function should be called which returns a promise result or error. The function has 3 params but only one is required.
+For Request types **get, post, patch, put, delete, head** a handleRequest function should be called which returns a promise result or error. The function has 3 params but only one is required.
 
 Params are:
 
