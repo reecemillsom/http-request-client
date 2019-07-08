@@ -1,16 +1,7 @@
-const Get = require('../dist/index').Get,
-    XMLHttpFactory = require('../dist/index').XMLHttpFactory;
+const Get = require('../src/Request/GetRequest/GetRequest').GetRequest,
+    XMLHttpFactory = require('../src/XMLHttpRequestFactory/XMLHttpRequestFactory').XMLHttpRequestFactory;
 
-const xmlHttpFactory = new XMLHttpFactory(XMLHttpRequest);
-const get = new Get(xmlHttpFactory);
+const xmlHttpFactory = new XMLHttpFactory(XMLHttpRequest),
+    get = new Get(xmlHttpFactory);
 
-
-get.handleRequest("https://jsonplaceholder.typicode.com/posts").then((response) => {
-
-    console.log('response>', response);
-
-}).catch((error) => {
-
-    console.log("error>", error);
-
-});
+module.exports = get;
