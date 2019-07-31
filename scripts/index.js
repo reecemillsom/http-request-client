@@ -1,5 +1,8 @@
-module.exports.get = require('./TestGetRequest');
-module.exports.post = require('./TestPostRequest');
-module.exports.del = require('./TestDeleteRequest');
-module.exports.head = require('./TestHeadRequest');
-module.exports.patch = require('./TestPatchRequest');
+module.exports = {
+	get: require('./TestGetRequest'),
+	post: require('./TestPostRequest'),
+	del: require('./TestDeleteRequest'),
+	head: require('./TestHeadRequest'),
+	patch: require('./TestPatchRequest'),
+	put: require('./TestPutRequest'),
+};
