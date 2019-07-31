@@ -1,16 +1,7 @@
-const Head = require('../dist/index').Head,
-    XMLHttpFactory = require('../dist/index').XMLHttpFactory;
+const Head = require('../src/Request/HeadRequest/HeadRequest').HeadRequest,
+	XMLHttpFactory = require('../src/XMLHttpRequestFactory/XMLHttpRequestFactory').XMLHttpRequestFactory;
 
-const xmlHttpFactory = new XMLHttpFactory(XMLHttpRequest);
-const head = new Head(xmlHttpFactory);
+const xmlHttpFactory = new XMLHttpFactory(XMLHttpRequest),
+	head = new Head(xmlHttpFactory);
 
-
-head.handleRequest("https://jsonplaceholder.typicode.com/posts").then((response) => {
-
-    console.log('response>', response);
-
-}).catch((error) => {
-
-    console.log("error>", error);
-
-});
+module.exports = head;
