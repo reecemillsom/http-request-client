@@ -1,12 +1,13 @@
 {
   "name": "http-request-client",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "Http Client wrapper for doing requests",
   "main": "./dist/index.js",
   "scripts": {
     "tsc": "tsc",
     "tslint": "rm -rf dist/ && tslint -c tslint.json src/**/*.ts",
-    "test": "npm run tslint && npm run tsc && nyc mocha"
+    "test": "npm run tslint && npm run tsc && nyc mocha",
+    "browserify": "browserify ./scripts/index.js -p [ tsify ] -s requests -o ./browserify/TestRequests.js"
   },
   "author": "Reece Millsom",
   "license": "ISC",
@@ -29,6 +30,7 @@
     "@types/mocha": "^5.2.6",
     "@types/sinon": "^7.0.12",
     "@types/sinon-chai": "^3.2.2",
+    "browserify": "^16.3.0",
     "chai": "^4.2.0",
     "codecov": "^3.5.0",
     "mocha": "^6.1.4",
@@ -37,6 +39,7 @@
     "sinon-chai": "^3.3.0",
     "source-map-support": "^0.5.12",
     "ts-node": "^8.2.0",
+    "tsify": "^4.0.1",
     "tslint": "^5.16.0",
     "typescript": "^3.4.5"
   },

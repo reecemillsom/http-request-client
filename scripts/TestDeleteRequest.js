@@ -1,16 +1,7 @@
-const Del = require('../dist/index').Del,
-    XMLHttpFactory = require('../dist/index').XMLHttpFactory;
+const Delete = require('../src/Request/DeleteRequest/DeleteRequest').DeleteRequest,
+	XMLHttpFactory = require('../src/XMLHttpRequestFactory/XMLHttpRequestFactory').XMLHttpRequestFactory;
 
-const xmlHttpFactory = new XMLHttpFactory(XMLHttpRequest);
-const del = new Del(xmlHttpFactory);
+const xmlHttpFactory = new XMLHttpFactory(XMLHttpRequest),
+	del = new Delete(xmlHttpFactory);
 
-
-del.handleRequest("https://jsonplaceholder.typicode.com/posts/1").then((response) => {
-
-    console.log('response>', response);
-
-}).catch((error) => {
-
-    console.log("error>", error);
-
-});
+module.exports = del;

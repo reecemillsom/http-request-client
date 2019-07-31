@@ -7,14 +7,13 @@ export class GetRequest extends Request {
 
 		if (!url) {
 
-			return Bluebird.reject({ error: "Please provide a url"});
+			return Bluebird.reject({error: "Please provide a url"});
 
 		}
 
 		return await this.getResponse(url, headers, data);
 
 	}
-
 
 	private getResponse(url: string, headers?: object, data?: any): Bluebird<object> {
 
@@ -32,10 +31,9 @@ export class GetRequest extends Request {
 
 					if (!this.isRequestSuccessful(xmlHttpRequest)) {
 
-						return reject({ error: "Request didn't come back valid" });
+						return reject({error: "Request didn't come back valid"});
 
 					}
-
 
 					try {
 
@@ -59,7 +57,6 @@ export class GetRequest extends Request {
 		});
 
 	}
-
 
 
 	private parseResponse(responseText: string): object {

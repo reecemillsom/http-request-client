@@ -1,21 +1,7 @@
-const Put = require('../dist/index').Put,
-    XMLHttpFactory = require('../dist/index').XMLHttpFactory;
+const Put = require('../src/Request/PutRequest/PutRequest').PutRequest,
+	XMLHttpFactory = require('../src/XMLHttpRequestFactory/XMLHttpRequestFactory').XMLHttpRequestFactory;
 
-const xmlHttpFactory = new XMLHttpFactory(XMLHttpRequest);
-const put = new Put(xmlHttpFactory);
+const xmlHttpFactory = new XMLHttpFactory(XMLHttpRequest),
+	put = new Put(xmlHttpFactory);
 
-
-put.handleRequest("https://jsonplaceholder.typicode.com/posts/1", null, JSON.stringify({
-    title: 'dog',
-    id: 100,
-    body: 'cat',
-    userId: 10
-})).then((response) => {
-
-    console.log('response>', response);
-
-}).catch((error) => {
-
-    console.log("error>", error);
-
-});
+module.exports = put;

@@ -12,7 +12,7 @@ export abstract class Request {
 
 	protected setRequestHeaders(xmlHttpRequest: XMLHttpRequest, headers: object) {
 
-		_.each(headers,(value, key) => {
+		_.each(headers, (value, key) => {
 
 			xmlHttpRequest.setRequestHeader(key, value);
 

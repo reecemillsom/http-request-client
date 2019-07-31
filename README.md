@@ -67,11 +67,15 @@ If using fetch be aware the current support of this function is for more recent 
 
 ## Examples of requests
 
-To see examples of how to structure each request visit:
+In order to test these requests you can clone the respository. I created a browserified bundle which gets attached to the window.
 
-<https://github.com/reecemillsom/http-request-client/tree/master/scripts>
+In order to test follow these steps:
 
-These scripts will not run in this context as it has no access to window. Easiest way to test this is to install yourself and use in a project.
+1. Run `npm run browserify` - This will output a file in the browserify directory called `TestRequests`.
+2. Open the html file located in the scripts directory in the browser - `TestRequests.html`.
+3. Open the developer console.
+4. Type requests and hit enter. You will see the instance for the corresponding requests are attached.
+5. Each instance has a `handleRequest` function as described earlier, fill the parameters as necessary and call the function.
 
 ## Issues
 

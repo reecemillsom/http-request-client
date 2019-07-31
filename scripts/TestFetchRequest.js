@@ -1,29 +1,7 @@
-const Fetch = require('../dist/index').Fetch,
-    RequestFactory = require('../dist/index').FetchRequestFactory;
+const Fetch = require('../src/Request/FetchRequest/FetchRequest').FetchRequest,
+	XMLHttpFactory = require('../src/XMLHttpRequestFactory/XMLHttpRequestFactory').XMLHttpRequestFactory;
 
-const requestFactory = new RequestFactory(Request);
-const fetch = new Fetch(requestFactory, window);
+const xmlHttpFactory = new XMLHttpFactory(XMLHttpRequest),
+	fetch = new Fetch(xmlHttpFactory);
 
-
-fetch.handleRequest("https://jsonplaceholder.typicode.com/posts").then((response) => {
-
-    console.log('response>', response);
-
-}).catch((error) => {
-
-    console.log("error>", error);
-
-});
-
-fetch.handleRequest("https://jsonplaceholder.typicode.com/posts", {
-    method: "POST",
-    mode: "cors"
-}).then((response) => {
-
-    console.log("response>", response);
-
-}).catch((error) => {
-
-    console.log('error>', error);
-
-});
+module.exports = fetch;
