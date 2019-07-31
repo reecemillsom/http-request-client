@@ -5,4 +5,5 @@ module.exports = {
 	head: require('./TestHeadRequest'),
 	patch: require('./TestPatchRequest'),
 	put: require('./TestPutRequest'),
+	fetch: require('./TestFetchRequest')
 };
