@@ -1,4 +1,4 @@
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.get = f()}})(function(){var define,module,exports;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.requests = f()}})(function(){var define,module,exports;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 (function (process,global,setImmediate){
 /* @preserve
  * The MIT License (MIT)
@@ -23044,35 +23044,6 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
 };
 }).call(this,require("timers").setImmediate,require("timers").clearImmediate)
 },{"process/browser.js":3,"timers":4}],5:[function(require,module,exports){
-// const Get = require('../dist/index').Get,
-//     XMLHttpFactory = require('../dist/index').XMLHttpFactory;
-//
-// const xmlHttpFactory = new XMLHttpFactory(XMLHttpRequest);
-// const get = new Get(xmlHttpFactory);
-
-
-// get.handleRequest("https://jsonplaceholder.typicode.com/posts").then((response) => {
-//
-//     console.log('response>', response);
-//
-// }).catch((error) => {
-//
-//     console.log("error>", error);
-//
-// });
-
-
-//JSON test
-// get.handleRequest("http://localhost:3000/json").then((response) => {
-//
-//     console.log('response>', response);
-//
-// }).catch((error) => {
-//
-//     console.log('error>', error);
-//
-// });
-
 const Get = require('../src/Request/GetRequest/GetRequest').GetRequest,
     XMLHttpFactory = require('../src/XMLHttpRequestFactory/XMLHttpRequestFactory').XMLHttpRequestFactory;
 
@@ -23080,9 +23051,21 @@ const xmlHttpFactory = new XMLHttpFactory(XMLHttpRequest),
     get = new Get(xmlHttpFactory);
 
 module.exports = get;
-// window.handleRequest = get.handleRequest;
 
-},{"../src/Request/GetRequest/GetRequest":6,"../src/XMLHttpRequestFactory/XMLHttpRequestFactory":8}],6:[function(require,module,exports){
+},{"../src/Request/GetRequest/GetRequest":8,"../src/XMLHttpRequestFactory/XMLHttpRequestFactory":11}],6:[function(require,module,exports){
+const Post = require('../src/Request/PostRequest/PostRequest').PostRequest,
+	XMLHttpFactory = require('../src/XMLHttpRequestFactory/XMLHttpRequestFactory').XMLHttpRequestFactory;
+
+const xmlHttpFactory = new XMLHttpFactory(XMLHttpRequest),
+	post = new Post(xmlHttpFactory);
+
+module.exports = post;
+
+},{"../src/Request/PostRequest/PostRequest":9,"../src/XMLHttpRequestFactory/XMLHttpRequestFactory":11}],7:[function(require,module,exports){
+module.exports.get = require('./TestGetRequest');
+module.exports.post = require('./TestPostRequest');
+
+},{"./TestGetRequest":5,"./TestPostRequest":6}],8:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -23184,10 +23167,109 @@ var GetRequest = (function (_super) {
 }(Request_1.Request));
 exports.GetRequest = GetRequest;
 
-},{"../Request":7,"bluebird":1}],7:[function(require,module,exports){
+},{"../Request":10,"bluebird":1}],9:[function(require,module,exports){
+"use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var Bluebird = require("bluebird");
+var Request_1 = require("../Request");
+var PostRequest = (function (_super) {
+    __extends(PostRequest, _super);
+    function PostRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    PostRequest.prototype.handleRequest = function (url, headers, data) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!url) {
+                            return [2, Bluebird.reject({ error: "Please provide a url" })];
+                        }
+                        return [4, this.postRequest(url, headers, data)];
+                    case 1: return [2, _a.sent()];
+                }
+            });
+        });
+    };
+    PostRequest.prototype.postRequest = function (url, headers, data) {
+        var _this = this;
+        var xmlHttpRequest = this.xmlHttpRequestFactory.create();
+        xmlHttpRequest.open("POST", url, true);
+        this.setRequestHeaders(xmlHttpRequest, headers);
+        return new Bluebird(function (resolve, reject) {
+            xmlHttpRequest.onload = function () {
+                if (_this.isRequestSuccessful(xmlHttpRequest)) {
+                    return resolve(xmlHttpRequest.responseText);
+                }
+                return reject({ error: "POST was unsuccessful", statusCode: xmlHttpRequest.status });
+            };
+            xmlHttpRequest.send(data);
+        });
+    };
+    return PostRequest;
+}(Request_1.Request));
+exports.PostRequest = PostRequest;
+
+},{"../Request":10,"bluebird":1}],10:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var _ = require("lodash");
+var ResponseType;
+(function (ResponseType) {
+    ResponseType["ArrayBuffer"] = "arraybuffer";
+    ResponseType["Blob"] = "blob";
+    ResponseType["Document"] = "document";
+    ResponseType["Json"] = "json";
+    ResponseType["Text"] = "text";
+})(ResponseType = exports.ResponseType || (exports.ResponseType = {}));
 var Request = (function () {
     function Request(xmlHttpRequestFactory) {
         this.xmlHttpRequestFactory = xmlHttpRequestFactory;
@@ -23205,7 +23287,7 @@ var Request = (function () {
 }());
 exports.Request = Request;
 
-},{"lodash":2}],8:[function(require,module,exports){
+},{"lodash":2}],11:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var XMLHttpRequestFactory = (function () {
@@ -23219,5 +23301,5 @@ var XMLHttpRequestFactory = (function () {
 }());
 exports.XMLHttpRequestFactory = XMLHttpRequestFactory;
 
-},{}]},{},[5])(5)
+},{}]},{},[7])(7)
 });

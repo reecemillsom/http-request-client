@@ -7,7 +7,7 @@
     "tsc": "tsc",
     "tslint": "rm -rf dist/ && tslint -c tslint.json src/**/*.ts",
     "test": "npm run tslint && npm run tsc && nyc mocha",
-    "browserify": "browserify ./scripts/TestGetRequest.js -p [ tsify ] -s get -o ./browserify/TestGetRequest.js"
+    "browserify": "browserify ./scripts/index.js -p [ tsify ] -s requests -o ./browserify/TestRequests.js"
   },
   "author": "Reece Millsom",
   "license": "ISC",

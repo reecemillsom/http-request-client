@@ -1,6 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var _ = require("lodash");
+var ResponseType;
+(function (ResponseType) {
+    ResponseType["ArrayBuffer"] = "arraybuffer";
+    ResponseType["Blob"] = "blob";
+    ResponseType["Document"] = "document";
+    ResponseType["Json"] = "json";
+    ResponseType["Text"] = "text";
+})(ResponseType = exports.ResponseType || (exports.ResponseType = {}));
 var Request = (function () {
     function Request(xmlHttpRequestFactory) {
         this.xmlHttpRequestFactory = xmlHttpRequestFactory;
