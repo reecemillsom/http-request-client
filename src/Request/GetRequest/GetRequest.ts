@@ -3,7 +3,6 @@ import {Request} from "../Request";
 
 export class GetRequest extends Request {
 
-	//TODO this will have to change to be of type Request instead of string.
 	public async handleRequest(url: string, headers?: object, data?: any) {
 
 		if (!url) {
@@ -16,7 +15,6 @@ export class GetRequest extends Request {
 
 	}
 
-	//TODO this will have to change to be of type Request instead of string.
 	private getResponse(url: string, headers?: object, data?: any): Bluebird<object> {
 
 		const xmlHttpRequest = this.xmlHttpRequestFactory.create();
@@ -37,7 +35,6 @@ export class GetRequest extends Request {
 
 					}
 
-					//TODO if understood responseType correctly won't need to try resolve manually, just resolve the returned value from the server.
 					try {
 
 						const result = this.parseResponse(xmlHttpRequest.responseText);

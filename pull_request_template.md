@@ -1,6 +1,6 @@
 # (Feature or Fix): Select one
 
-## Descripton
+## Description
 
 Describe the feature or fix you are submitting. E.g. What does it do?
 

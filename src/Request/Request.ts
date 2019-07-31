@@ -1,18 +1,5 @@
 import * as _ from "lodash";
 
-export enum ResponseType {
-	ArrayBuffer = 'arraybuffer',
-	Blob = 'blob',
-	Document = 'document',
-	Json = 'json',
-	Text = 'text'
-}
-
-export interface Request {
-	url: string;
-	responseType: ResponseType;
-}
-
 export abstract class Request {
 
 	constructor(protected xmlHttpRequestFactory: any) {
@@ -20,7 +7,6 @@ export abstract class Request {
 
 	}
 
-	//TODO change this to use type Request rather than string.
 	public abstract async handleRequest(url: string, headers?: object, data?: any);
 
 
